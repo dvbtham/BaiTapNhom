@@ -1,0 +1,35 @@
+﻿<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="mainmenu pull-left">
+                <ul class="nav navbar-nav collapse navbar-collapse">
+                    <li><a href="@Url.Action("Index","Home")" class="@ViewBag.Home">Trang chủ</a></li>
+                    <li class="dropdown">
+                        <a href="#">Chuyên đề<i class="fa fa-angle-down"></i></a>
+                        <ul role="menu" class="sub-menu">
+                            @{Html.RenderAction("SubMenu", "Category");}
+                        </ul>
+                    </li>
+                    <li><a href="/Assets/Index">Tài nguyên</a></li>
+                    <li><a href="/lien-he" class="@ViewBag.Contact">Liên hệ</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            @using (Html.BeginForm("Index", "Home", FormMethod.Get))
+            {
+                <div class="search_box pull-right">
+                    <input type="text" value="@ViewBag.SearchString" name="searchString" placeholder="Nhập để tìm kiếm..." />
+                </div>
+            }
+        </div>
+    </div>
+</div>

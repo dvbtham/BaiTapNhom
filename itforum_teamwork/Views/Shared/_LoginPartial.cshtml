@@ -1,0 +1,37 @@
+﻿@using itforum_teamwork.Common;
+@using Model.DAO
+
+@{
+    var session = (UserLogin)Session[itforum_teamwork.Common.CommonConstants.CLIENT_USER_SESSION];
+}
+@if (session != null)
+{
+    var userModel = new UserDAO().GetUserByEmail(session.Email);
+
+    <div class="nav navbar-nav navbar-right">
+        <div class="btn-group pull-right">
+            <img width="30" class="img-circle pull-left" src="@Url.Content("" + userModel.Avatar)" />
+            <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle extend" data-toggle="dropdown">
+                    @session.Name
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="/ho-so/thong-tin-nguoi-dung">Thông tin cá nhân</a></li>
+                    <li><a href="/bai-viet/bai-viet-cua-toi">Quản lý bài viết</a></li>
+                    <li><a href="@Url.Action("Logout","Manage")">Đăng xuất</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+}
+else
+{
+    <div class="shop-menu pull-right">
+        <ul class="nav navbar-nav">
+            <li><span class="fa fa-user-plus"><a href="/dang-ky"> Đăng ký</a></span> </li>
+            <li><span class="fa fa-user"><a href="/dang-nhap"> Đăng nhập</a></span> </li>
+        </ul>
+    </div>
+}

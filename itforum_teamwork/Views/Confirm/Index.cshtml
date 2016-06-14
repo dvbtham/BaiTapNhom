@@ -1,0 +1,11 @@
+﻿@using Model.DAO
+@{
+    ViewBag.Title = "Xác thực tài khoản";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var dao = new UserDAO().GetUserByEmail(Session["client_Email"].ToString());
+    
+}
+
+<p>Xin chào <span class="text-danger">@dao.Name</span>, cám ơn bạn đã đăng ký tài khoản trên <a href="http://codto.com">codto.com</a></p>
+<p> Để kích hoạt tài khoản, vui lòng xác nhận bằng email của bạn @ViewBag.ActiveEmail</p>
+

@@ -1,0 +1,59 @@
+﻿@model Model.EF.Post
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var userDAO = new Model.DAO.UserDAO();
+    var catDAO = new Model.DAO.CategoryDAO();
+    var userModel = userDAO.GetUserByID(Model.UserID);
+    var catModel = catDAO.GetCategoryByID(Model.CategoryID);
+
+}
+<div class="blog-post-area">
+    <h2 class="title text-center">Nội dung bài viết</h2>
+    <div class="single-blog-post">
+
+        <h3>@Model.Title</h3>
+        <div class="post-meta">
+            <ul>
+                <li><i class="fa fa-user"></i><a href="@Url.Action("PostByUser", "Article", new { id = Model.UserID })">@userModel.Name</a></li>
+                <li><i class="fa fa-th-list"></i><a href="@Url.Action("Index", "Article", new { id = Model.CategoryID })">@catModel.CategoryName</a></li>
+                <li><i class="fa fa-calendar"></i>@Model.PostedDate</li>
+            </ul>
+        </div>
+        @Html.Raw(Model.Detail)
+        <div class="pager-area">
+            <ul class="pager pull-right">
+                <li><a href="#">Pre</a></li>
+                <li><a href="@Url.Action("GetNextPost", "Article", new { PostID = Model.PostID, CatID = Model.CategoryID})">Next</a></li>
+            </ul>
+        </div>
+        <div class="rating-area">
+            <ul class="tag">
+                <li>TAG:</li>
+                <li><a class="color" href="">asp.net <span>/</span></a></li>
+                <li><a class="color" href="">Lap trinh web <span>/</span></a></li>
+                <li><a class="color" href="">mvc</a></li>
+            </ul>
+        </div><!--/rating-area-->
+        <div class="media commnets">
+            <a class="pull-left" href="#">
+                <img class="media-object" id="resize-avatar" src="@Url.Content(""+userModel.Avatar)" alt="">
+            </a>
+            <div class="media-body">
+                <h4 class="media-heading">@userModel.Name</h4>
+                <p> @userModel.AboutMe</p>
+                <div class="blog-socials">
+                    <ul>
+                        <li><a href="http://facebook.com/dvbtham.it"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href=""><i class="fa fa-google-plus"></i></a></li>
+                    </ul>
+                    <a class="btn btn-primary" href="@Url.Action("PostByUser", "Article", new { id = Model.UserID })">Other Posts</a>
+                </div>
+            </div>
+        </div><!--Comments-->
+
+        <div class="fb-comments" data-href="https://localhost/Article/Details/@Model.PostID" data-numposts="5"></div>
+
+    </div><!--/Response-area-->
+
+</div>

@@ -1,0 +1,117 @@
+﻿@model Model.EF.Post
+@using itforum_teamwork.Common
+
+@{
+    ViewBag.Title = Model.Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var userDAO = new Model.DAO.UserDAO();
+    var catDAO = new Model.DAO.CategoryDAO();
+    var userModel = userDAO.GetUserByID(Model.UserID);
+    var catModel = catDAO.GetCategoryByID(Model.CategoryID);
+    //Lay link mang xa hoi
+    var socnetModel = new Model.DAO.SocNetDAO().GetSocNet(Model.UserID,"FB");
+    var linkByUser = "/bai-viet/tac-gia/" + ConvertToUnsign.ConvertToUnSign(userModel.Name).ToLower() + "-" + Model.UserID;
+    var linkByCategory = "/bai-viet/danh-muc/" + ConvertToUnsign.ConvertToUnSign(catModel.CategoryName).ToLower() + "-" + Model.CategoryID;
+
+    var linkNextArt = "/bai-viet/chi-tiet/" + ConvertToUnsign.ConvertToUnSign(ViewBag.nextTitle).ToLower() + "-" + ViewBag.NextID;
+    var linkPrevArt = "/bai-viet/chi-tiet/" + ConvertToUnsign.ConvertToUnSign(ViewBag.prevTitle).ToLower() + "-" + ViewBag.PrevID;
+
+}
+<div class="blog-post-area">
+    <h2 class="title text-center">Nội dung bài viết</h2>
+    <div class="single-blog-post">
+        <div class="row">
+            <div class="btn-group btn-breadcrumb">
+                <a href="/" class="btn btn-warning"><i class="glyphicon glyphicon-home"></i></a>
+                <a href="/bai-viet" class="btn btn-warning active">Bài viết</a>
+                <a href="@linkByCategory" class="btn btn-warning">@catModel.CategoryName</a>
+                <a class="btn btn-warning disabled">@Model.Title</a>
+            </div>
+        </div>
+        <h3>@Model.Title</h3>
+        <div class="post-meta">
+            <ul>
+                <li><i class="fa fa-user"></i><a href="@linkByUser">@userModel.Name</a></li>
+                <li><i class="fa fa-th-list"></i><a href="@linkByCategory">@catModel.CategoryName</a></li>
+                <li><i class="fa fa-calendar"></i>@Model.PostedDate</li>
+                <li><i class="fa fa-eye"></i>@Model.Views</li>
+            </ul>
+        </div>
+        @Html.Raw(Model.Detail)
+        <div class="pager-area">
+            <ul class="pager pull-right">
+
+                <li><a href="@linkPrevArt"> Pre </a></li>
+                <li><a href="@linkNextArt"> Next </a></li>
+
+            </ul>
+        </div>
+        <div class="rating-area">
+            <ul class="ratings">
+                <li>
+                    <div class="fb-like" data-href="https://localhost/Article/Details/@Model.PostID" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+                </li>
+            </ul>
+            <ul class="tag">
+                <li>TAG:</li>
+                @{
+                    var tags = (List<Model.EF.Tag>)ViewBag.Tags;
+                    if (tags.Count > 0)
+                    {
+                        foreach (var tag in tags)
+                        {
+                            var linkByTag = "/bai-viet/tag/" + ConvertToUnsign.ConvertToUnSign(tag.Name) + "-" + tag.TagID;
+                            <li><a class="color" href="@linkByTag">@tag.Name <span>/</span></a></li>
+                        }
+                    }
+                    else
+                    {
+                        <li>Bài viết này chưa được gắn thẻ</li>
+                    }
+                }
+            </ul>
+        </div><!--/rating-area-->
+        <div class="media commnets">
+            <a class="pull-left" href="#">
+                <img class="media-object" id="resize-avatar" src="@Url.Content(""+userModel.Avatar)" alt="">
+            </a>
+            <div class="media-body">
+                <h4 class="media-heading">@userModel.Name</h4>
+                <h5> @userModel.AboutMe</h5>
+                <div class="blog-socials">
+                    @if (socnetModel != null)
+                    {
+                        <ul>
+                            <li><a href="@socnetModel.Link" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href=""><i class="fa fa-google-plus"></i></a></li>
+                        </ul>
+                    }
+                    else
+                    {
+                        
+                        var session = (UserLogin)Session[itforum_teamwork.Common.CommonConstants.CLIENT_USER_SESSION];
+                        if (session != null)
+                        {
+                            <h5>
+                                Chưa cập nhật thông tin mạng xã hội
+                                @if (session.UserID == Model.UserID)
+                                {
+                                    <a href="#">Cập nhật</a>
+                                }
+                            </h5>
+                        }
+                        else
+                        {
+                            <h5>Chưa cập nhật thông tin mạng xã hội</h5>
+                        }
+                    }
+                    <a class="btn btn-primary" href="@linkByUser">Bài viết khác</a>
+                </div>
+            </div>
+        </div><!--Comments-->
+        <h4 class="orange">Bình luận</h4>
+        <div class="fb-comments" data-href="https://localhost/Article/Details/@Model.PostID" data-numposts="5"></div>
+
+    </div><!--/Response-area-->
+
+</div>

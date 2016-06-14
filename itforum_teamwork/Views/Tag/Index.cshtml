@@ -1,0 +1,17 @@
+﻿@model IEnumerable<Model.EF.Tag>
+@using itforum_teamwork.Common
+<div class="categories-name">
+    <ul class="nav nav-pills nav-assets">
+
+        @foreach (var tag in Model)
+        {
+            var linkByTag = "/bai-viet/tag/" + ConvertToUnsign.ConvertToUnSign(tag.Name).ToLower() + "-" + tag.TagID;   
+            <li>
+                <a class="color" href="@linkByTag">
+                    <span class="glyphicon glyphicon-tag" style="margin-right:10px"></span>@tag.Name.ToLower()
+                </a>
+            </li>
+        }
+
+    </ul>
+</div>

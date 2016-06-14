@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Model.EF.Post>
+
+@{
+    var newPost = (IEnumerable<Model.EF.Post>)ViewBag.NewPost;
+}
+<h2 class="title text-center">Bài viết</h2>
+<div class="article-tab">
+    <!--category-tab-->
+    <div class="title-tab">
+        <ul class="nav nav-tabs">
+            <li class="active"><a class="tab-title" href="#newPost" data-toggle="tab">mới</a></li>
+            <li><a class="tab-title" href="#popPost" data-toggle="tab">phổ biến</a></li>
+        </ul>
+    </div>
+    <div class="tab-content">
+        <div class="tab-pane fade active in" id="newPost">
+            <ul class="tab-content">
+                
+                @foreach (var item in newPost)
+                {
+                    var linkRead = "/bai-viet/chi-tiet/" + itforum_teamwork.Common.ConvertToUnsign.ConvertToUnSign(item.Title).ToLower() + "-" + item.PostID;
+
+                    <li class="li-custom-tab">
+                        <a href="@linkRead">
+                            @item.Title
+                            <span class="glyphicon glyphicon-calendar span-custom-tab">
+                                <span class="span-custom-tab-2">
+                                    @Convert.ToDateTime(item.PostedDate).ToShortDateString()
+                                </span>
+                            </span>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </div>
+
+        <div class="tab-pane fade" id="popPost">
+            <ul class="tab-content">
+                @foreach (var item in Model)
+                {
+                    var linkRead = "/bai-viet/chi-tiet/" + itforum_teamwork.Common.ConvertToUnsign.ConvertToUnSign(item.Title).ToLower() + "-" + item.PostID;
+
+                    <li class="li-custom-tab">
+                        <a href="@linkRead">
+                            @item.Title<span class="glyphicon glyphicon-eye-open span-custom-tab">
+                                <span class="span-custom-tab-2">
+                                    @item.Views
+                                </span>
+                            </span>
+                        </a>
+                    </li>
+
+                }
+            </ul>
+        </div>
+    </div>
+</div><!--/category-tab-->

@@ -1,0 +1,67 @@
+﻿@using MvcPaging
+@using Model.DAO
+@model IPagedList<Model.EF.Asset>
+
+@{
+    var assetsDAO = new AssetsDAO();
+    var userDao = new UserDAO();
+}
+@if (Model.Count > 0)
+{
+    foreach (var item in Model)
+    {
+        var assetType = assetsDAO.GetAssetTypeByID(item.AssetTypeID);
+        var userModel = userDao.GetUserByID(item.UserID);
+
+        <div class="col-sm-12 ">
+            <div class="col-sm-4 post_info">
+                <div class="pic_box">
+                    <img class="img-responsive" src="@Url.Content(""+item.Image)" width="270" height="280" alt="@item.Title" />
+                </div>
+            </div>
+            <div class="col-sm-7 col-sm-offset-1">
+                <a href="" id="viewPost"><h4>@item.Title</h4></a>
+                <div class="post-meta"><i class="fa fa-user"></i><a href=""> @userModel.Name </a>
+                        <i class="fa fa-th-list"></i><a href=""> @assetType.AssetName </a>
+                        <i class="fa fa-calendar"></i> @item.PostedDate
+                        <i class="fa fa-eye"></i> @item.Views
+                </div>
+                <p>@Html.Raw(item.Content)</p>
+                <button class="btn btn-primary">
+                    <a href=""> Chi tiết </a><span class="glyphicon glyphicon-chevron-right"></span>
+                </button>
+
+            </div>
+        </div>
+        <div class="clear"></div>
+    }
+    <div class="pager">
+        @Html.Raw(Ajax.Pager(
+            new Options
+            {
+                PageSize = Model.PageSize,
+                TotalItemCount = Model.TotalItemCount,
+                CurrentPage = Model.PageNumber,
+                ItemTexts = new ItemTexts() { First = "Trang đầu", Previous = "Trang sau", Next = "Trang kế tiếp", Last = "Trang cuối" },
+                ItemIcon = new ItemIcon() { First = "icon-backward", Previous = "icon-chevron-left", Next = "icon-chevron-right", Last = "icon-forward" },
+                TooltipTitles = new TooltipTitles() { Next = "Trang kế tiếp", Previous = "Trang sau", Page = "Trang {0}.", First = "Về trang đầu", Last = "Đi tới trang cuối" },
+                Size = Size.mini,
+                Alignment = Alignment.centered,
+                IsShowControls = true,
+                IsShowFirstLast = true,
+                CssClass = ""
+            },
+            new AjaxOptions
+            {
+                UpdateTargetId = "grid-list",
+                OnBegin = "beginPaging",
+                OnSuccess = "successPaging",
+                OnFailure = "failurePaging"
+            }, new { controller = "Assets", action = "Index", searchString = ViewBag.SearchString }))
+
+    </div>
+}
+else
+{
+    <h4 class="text-center text-danger">Không có dữ liệu</h4>
+}

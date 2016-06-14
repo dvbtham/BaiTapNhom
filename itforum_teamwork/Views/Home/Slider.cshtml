@@ -1,0 +1,49 @@
+﻿@{
+    var slides = (List<Model.EF.Post>)ViewBag.Slides;
+}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <div id="slider-carousel" class="carousel slide" data-ride="carousel">
+
+                <div class="carousel-inner">
+                    @{
+                        var j = 0;
+                        foreach (var itemModel in slides)
+                        {
+                            var linkRead = "/bai-viet/chi-tiet/" + itforum_teamwork.Common.ConvertToUnsign.ConvertToUnSign(itemModel.Title).ToLower() + "-" + itemModel.PostID;
+                            var itemClass = j++ == 0 ? "item active" : "item";
+                            <div class="@itemClass">
+                                <div class="col-sm-6">
+                                    <h1><span>IT</span>-Forum</h1>
+                                    <h2>@itemModel.Title</h2>
+                                    <p>@Html.Raw(itemModel.Content)</p>
+                                    <button type="button" class="btn btn-default get"><a href="@linkRead">Đọc tiếp</a></button>
+                                </div>
+                                <div class="col-sm-6">
+                                    <img src="@Url.Content("" + itemModel.ImageShowOnHome )" class="image-slider img-responsive" width="250" alt="@itemModel.Title" />
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+                <ol class="carousel-indicators">
+                    @for (int s = 0; s < slides.Count; s++)
+                    {
+                        var itemNumber = slides[s];
+                        var itemClassTo = s == 0 ? "active" : "";
+                        <li data-target="#slider-carousel" data-slide-to="@itemNumber" class="@itemClassTo"></li>
+                    }
+                </ol>
+
+                <a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                <a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+
+            </div>
+        </div>
+    </div>
+</div>

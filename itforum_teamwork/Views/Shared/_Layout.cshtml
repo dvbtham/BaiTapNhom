@@ -1,0 +1,173 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="codto.com được sáng lập bởi nhóm sinh viên trường đại học đông á.">
+    <meta name="author" content="codto.com">
+    <meta property="fb:app_id" content="1750459958499714" />
+    <meta property="fb:admins" content="100010640762642" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    @Styles.Render("~/bundles/csscore")
+
+</head><!--/head-->
+
+<body>
+    <div id="fb-root"></div>
+    <script>
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.6&appId=1750459958499714";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+    <header id="header">
+        <!--header-->
+        <div class="header_top">
+            <!--header_top-->
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="contactinfo">
+                            <ul class="nav nav-pills">
+                                <li><a href="#"><i class="fa fa-phone"></i> +84 16 388 441 31</a></li>
+                                <li><a href="#"><i class="fa fa-envelope"></i> itf.was@gmail.com</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="social-icons pull-right">
+                            <ul class="nav navbar-nav">
+                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="#"><i class="fa fa-youtube"></i></a></li>
+                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!--/header_top-->
+
+        <div class="header-middle">
+            <!--header-middle-->
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="logo pull-left">
+                            <a href="@Url.Action("Index","Home")"><img class="logo" src="/Content/Client/images/home/logo.png" alt="" /></a>
+                        </div>
+
+                    </div>
+                    <div class="col-sm-8">
+                       @Html.Partial("_LoginPartial")
+                    </div>
+                </div>
+            </div>
+        </div><!--/header-middle-->
+
+        <div class="header-bottom">
+            <!--header-bottom-->
+            @Html.Partial("_HeaderBottom")
+        </div><!--/header-bottom-->
+    </header><!--/header-->
+
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="left-sidebar">
+                        <div class="categoty_post">
+                            <!--categoty_post-->
+                            <h2>DANH MỤC HOT</h2>
+                            @{Html.RenderAction("PopCategory", "Category");}
+                        </div><!--/categoty_post-->
+
+                        <div class="shipping text-center">
+                            <!--shipping-->
+                            <img src="/Content/Client/images/monhoc/advertise.jpg" />
+                        </div><!--/shipping-->
+                        <div class="clear"></div>
+                        <div class="categoty_post">
+                            <!--categoty_post-->
+                            <h2>Chuyên mục Tài nguyên</h2>
+                            @{Html.RenderAction("AssetsCategory", "Category");}
+                        </div><!--/categoty_post-->
+
+                        <br />
+                        @{Html.RenderAction("Top10Article", "Article");}
+                        <br />
+                        <div class="categoty_post">
+                            <!--categoty_post-->
+                            <h2>Tag</h2>
+                            @{Html.RenderAction("Index", "Tag");}
+                        </div><!--/categoty_post-->
+                        <br />
+                    </div>
+                </div>
+
+                <div class="col-sm-9 padding-right">
+                    @if (TempData["AlertMessage"] != null)
+                    {
+                        <div id="AlertBox" class="alert @TempData["AlertType"] hide">
+                            @TempData["AlertMessage"]
+                        </div>
+                    }
+                    
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer id="footer">
+        <!--Footer-->
+
+        <div class="footer-widget">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <div class="single-widget">
+                            <h2>Hỗ trợ</h2>
+                            <ul class="nav nav-pills nav-stacked">
+                                <li><a href="#">Online Help</a></li>
+                                <li><a href="#">Contact Us</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-2">
+                        <div class="single-widget">
+                            <h2>Điều khoản</h2>
+                            <ul class="nav nav-pills nav-stacked">
+                                <li><a href="#">Giấy phép sử dụng</a></li>
+                                <li><a href="#">Privecy Policy</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="single-widget">
+                            <h2>Về chúng tôi</h2>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="row">
+                    <p class="pull-left">Copyright © 2016 IT-FORUM Inc. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+
+    </footer><!--/Footer-->
+
+     @Scripts.Render("~/bundles/jscore")
+
+    @RenderSection("jsFooter", required: false)
+</body>
+</html>

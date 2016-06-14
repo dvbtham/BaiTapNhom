@@ -1,0 +1,60 @@
+﻿@model PagedList.IPagedList<Model.EF.PostTag>
+@using Model.DAO
+@using PagedList.Mvc
+@{
+    ViewBag.Title = "Danh sách tag bài viết";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    <script src="~/Content/Admin/dist/js/deleteConfirm.js"></script>
+    var dao = new PostTagDAO();
+}
+
+<a href="/admin/tag-bai-viet/them-tag"><i class="fa fa-plus" title="Thêm"> Gắn tag cho bài viết</i></a>
+<br />
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.First().PostID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().TagID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Views)
+        </th>
+        <th></th>
+    </tr>
+
+    @if (Model.Count > 0)
+    {
+        foreach (var item in Model)
+        {
+            var postModel = new PostTagDAO().GetPostTitle(item.PostID);
+            
+            var tags = new PostTagDAO().GetTagByID(item.PostID);
+            <tr>
+                <td>
+                    @postModel.Title
+                </td>
+                <td>
+                    @foreach (var tag in tags)
+                    {
+                        var tagModel = new PostTagDAO().GetTagName(tag.TagID);
+                        <button class="btn btn-default tag-btn">
+                            <i class="bage">@tagModel.Name</i>
+                            <a href="/admin/tag-bai-viet/xoa-tag/@tag.PostID/@tag.TagID" onclick="return DeleteConfirm()"><i class="fa fa-remove" title="Xóa"></i></a>
+                        </button>
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Views)
+                </td>
+            </tr>
+        }
+    }
+    else
+    {
+        <h5>Không có dữ liệu</h5>
+    }
+
+</table>
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))

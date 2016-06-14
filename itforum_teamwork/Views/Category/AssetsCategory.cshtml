@@ -1,0 +1,10 @@
+﻿@model IEnumerable<Model.EF.AssetType>
+<div class="categories-name">
+    <ul class="nav nav-pills nav-assets">
+        @foreach(var item in Model)
+        {
+            <li><a href="#">@item.AssetName</a></li>
+        }
+        
+    </ul>
+</div>

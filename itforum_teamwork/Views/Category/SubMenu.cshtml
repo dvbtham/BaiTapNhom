@@ -1,0 +1,18 @@
+﻿@model IEnumerable<Model.EF.Category>
+@using Model.DAO
+@using itforum_teamwork.Common
+@{
+    var dao = new CategoryDAO();
+}
+@foreach (var item in Model)
+{
+    var catModel = dao.GetCategoryByID(item.CategoryID);
+    var linkByCategory = "/bai-viet/danh-muc/" + ConvertToUnsign.ConvertToUnSign(catModel.CategoryName).ToLower() + "-" + item.CategoryID;
+    <li>
+        <a href="@linkByCategory">
+            @item.CategoryName
+        </a>
+    </li>
+
+}
+

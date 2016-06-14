@@ -1,0 +1,44 @@
+﻿@model itforum_teamwork.Areas.Admin.Models.LoginModel
+
+@{
+    ViewBag.Title = "Đăng nhập";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4 col-sm-offset-1">
+            <h4>Đăng nhập bằng tài khoản itForum</h4>
+            <div class="login-form">
+                @using (Html.BeginForm("Login", "Login", FormMethod.Post))
+                {
+                    @Html.ValidationSummary(false, "", new { @class = "text-danger" });
+                    <fieldset>
+                        <div class="form-group"><h5 class="text-danger">@ViewBag.Mess</h5></div>
+                        <div class="form-group">
+                            @Html.TextBoxFor(model => model._Account.Email, new { @class = "form-control", @placeholder = "Email của bạn..." })
+                        </div>
+                        <div class="form-group">
+                            @Html.PasswordFor(model => model._Account.Password, new { @class = "form-control", @placeholder = "Mật khẩu của bạn..." })
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <span>
+                                    @Html.CheckBoxFor(model => model.RememberMe) Ghi nhớ cho lần sau
+                                </span>
+                            </label>
+                        </div>
+                        <!-- Change this to a button or input when using this as a form -->
+                        <button type="submit" class="btn btn-default">Đăng nhập</button>
+                    </fieldset>
+                }
+            </div><!--/login form-->
+        </div>
+        <div class="col-sm-1">
+            <h2 class="or">Hoặc</h2>
+        </div>
+        <div class="col-sm-4">
+            <h4>Đăng nhập bằng mạng xã hội</h4>
+        </div>
+    </div>
+</div>

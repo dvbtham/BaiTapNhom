@@ -1,0 +1,41 @@
+﻿@model PagedList.IPagedList<Model.EF.Tag>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Quản lý tag";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    <script src="~/Content/Admin/dist/js/deleteConfirm.js"></script>
+}
+@using (Html.BeginForm("Index", "Tag", FormMethod.Get))
+{
+    <div class="container">
+        <div class="row">
+            <div id="custom-search-input">
+                <div class="input-group col-md-4">
+                    <input type="text" value="@ViewBag.SearchString" name="searchString" class="search-query form-control" placeholder="Search" />
+                    <span class="input-group-btn">
+                        <button class="btn btn-danger" type="button">
+                            <span class=" glyphicon glyphicon-search"></span>
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<a class="btn-add-tag" href="/Admin/Tag/AddTag"><i class="fa fa-plus-circle" title="Thêm tag mới"></i></a>
+<br />
+@if (Model.Count > 0)
+{
+    foreach (var item in Model)
+    {
+        <button class="btn btn-default tag-btn" value="@item.TagID">
+            <a href="/Admin/Tag/Edit/@item.TagID">@item.Name</a>
+            <a href="/Admin/Tag/Delete/@item.TagID" onclick="return DeleteConfirm()"><i class="fa fa-remove"></i></a>
+        </button>
+    }
+}
+else
+{
+    <h5 class="text-center text-danger">Không có dữ liệu</h5>
+}
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchString = ViewBag.SearchString }))

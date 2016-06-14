@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Model.EF.Category>
+@using Model.DAO
+@using itforum_teamwork.Common
+@{
+    var dao = new CategoryDAO();
+}
+<div class="categories-name">
+    @using (Html.BeginForm("Index", "Article", FormMethod.Post))
+    {
+        <ul class="nav nav-pills nav-stacked">
+            @foreach (var item in Model)
+            {
+                var catModel = dao.GetCategoryByID(item.CategoryID);
+                var linkByCategory = "/bai-viet/danh-muc/" + ConvertToUnsign.ConvertToUnSign(catModel.CategoryName).ToLower() + "-" + item.CategoryID;
+                <li>
+                    <a href="@linkByCategory">
+                        <span class="pull-right">(@dao.GetItemNumber(item.CategoryID))</span>@item.CategoryName
+                    </a>
+                </li>
+            }
+        </ul>
+    }
+</div>

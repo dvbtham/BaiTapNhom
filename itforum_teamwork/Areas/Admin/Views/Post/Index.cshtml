@@ -10,7 +10,7 @@
     Danh sách bài viết
 }
 
-
+@Html.ActionLink("Thêm mới bài viết", "Create","Post")
 @using (Ajax.BeginForm("Index", "Post",
                             new AjaxOptions { UpdateTargetId = "grid-list", HttpMethod = "get", LoadingElementId = "loading", OnBegin = "beginPaging", OnSuccess = "successPaging", OnFailure = "failurePaging" },
                             new { id = "frm-search" }))

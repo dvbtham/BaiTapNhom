@@ -664,6 +664,7 @@
     <Content Include="Content\Admin\dist\js\bootstrap.min.js" />
     <Content Include="Content\Admin\dist\js\deleteConfirm.js" />
     <Content Include="Content\Admin\dist\js\html5shiv.js" />
+    <Content Include="Areas\Admin\Views\Post\_AjaxPostList.cshtml" />
     <None Include="Content\Admin\dist\js\jquery-1.8.3-vsdoc.js" />
     <Content Include="Content\Admin\dist\js\jquery-1.8.3.js" />
     <Content Include="Content\Admin\dist\js\jquery-1.8.3.min.js" />
@@ -3387,7 +3388,6 @@
     <Content Include="Views\Post\Update.cshtml" />
     <Content Include="Views\Contact\Sent.cshtml" />
     <Content Include="Views\Confirm\Actived.cshtml" />
-    <Content Include="Views\Post\_AjaxPostList.cshtml" />
     <Content Include="Views\Assets\_AjaxAssetsList.cshtml" />
     <Content Include="Views\Assets\Index.cshtml" />
   </ItemGroup>

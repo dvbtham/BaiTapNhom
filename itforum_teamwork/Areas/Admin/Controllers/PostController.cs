@@ -97,8 +97,7 @@ namespace itforum_teamwork.Areas.Admin.Controllers
                 if (result)
                 {
                     SetAlert("Cập nhật bài viết thành công", "success");
-                    var postList = new ArticleDAO().GetListPaging(1, 5);
-                    return View("Index", postList);
+                    return RedirectToAction("Index");
                 }
             }
             else
@@ -113,6 +112,7 @@ namespace itforum_teamwork.Areas.Admin.Controllers
             if(result)
             {
                 SetAlert("Bài viết của bạn đã được xóa", "success");
+                return RedirectToAction("Index");
             }
             else
             {

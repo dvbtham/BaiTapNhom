@@ -60,7 +60,7 @@
                     @Html.DisplayFor(modelItem => item.Views)
                 </td>
                 <td>
-                    <a href="/Admin/Post/Update/@item.PostID"><i class="fa fa-edit"></i></a>
+                    <a href="/Admin/Post/Update/@item.PostID"><i class="fa fa-edit" title="Chỉnh sửa"></i></a>
                     |
                     @Ajax.ActionLink("Xóa", "Delete", new { id = item.PostID }, new AjaxOptions
                                {

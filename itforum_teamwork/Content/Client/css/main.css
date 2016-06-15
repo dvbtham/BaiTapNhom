@@ -11,6 +11,7 @@ body {
     position: relative;
     font-weight: 400;
 }
+
 ::selection {
     background-color: #FE980F;
     color: #fff;
@@ -38,15 +39,18 @@ body {
     background-color: #FE980F;
     color: #fff;
 }
+
 ul li {
     list-style: none;
 }
-span>a{
-    color:white;
+
+span > a {
+    color: white;
 }
-span>a:hover{
-    color:blue;
-}
+
+    span > a:hover {
+        color: blue;
+    }
 
 .img-circle {
     border: 2px solid orange;
@@ -59,10 +63,15 @@ span>a:hover{
 .bold {
     font-weight: bold;
 }
-.hr{
-    width:100%;
-    height:1%;
-    background-color:orange;
+
+hr {
+    display: block;
+    width: 90%;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #fcda87;
+    margin: 10px 10px;
+    padding: 0;
 }
 .orange {
     color: orange;
@@ -78,7 +87,7 @@ a:focus {
     outline-offset: 0;
 }
 
-button>a {
+button > a {
     color: white;
 }
 
@@ -182,9 +191,11 @@ span.span-custom-tab-2 {
         background-color: #333;
         color: orange;
     }
-    .btn>a:hover{
-        color:blue;
-    }
+
+.btn > a:hover {
+    color: blue;
+}
+
 #resize-avatar {
     width: 100px;
     height: 130px;

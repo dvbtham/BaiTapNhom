@@ -39,5 +39,58 @@ namespace Model.DAO
         {
             return db.Assets.Where(x => x.UserID == id).ToList();
         }
+        //CRUD
+
+        public bool Create(Asset model)
+        {
+            try
+            {
+                db.Assets.Add(model);
+                db.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        public bool Update(Asset model)
+        {
+            try
+            {
+                var myModel = db.Assets.Find(model.AssetID);
+                myModel.Title = model.Title;
+                myModel.Image = model.Image;
+                myModel.Link = model.Link;
+                myModel.AssetTypeID = model.AssetTypeID;
+                myModel.LinkDuPhong = model.LinkDuPhong;
+                myModel.EditedDate = DateTime.Now;
+                db.Entry(myModel);
+                db.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        public bool Delete(int id)
+        {
+            try
+            {
+                var model = db.Assets.Find(id);
+                db.Assets.Remove(model);
+                db.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        public List<AssetType> ListType()
+        {
+            return db.AssetTypes.ToList();
+        }
     }
 }

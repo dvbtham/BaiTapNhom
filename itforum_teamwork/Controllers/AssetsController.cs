@@ -23,7 +23,7 @@ namespace itforum_teamwork.Controllers
             }
             else
             {
-                assets = assets.Where(x => x.Title.Contains(searchString) || x.Content.Contains(searchString)).ToPagedList(currentPageIndex, defaultPageSize);
+                assets = assets.Where(x => x.Title.ToLower().Contains(searchString.ToLower()) || x.Content.Contains(searchString)).ToPagedList(currentPageIndex, defaultPageSize);
             }
             if (Request.IsAjaxRequest())
                 return PartialView("_AjaxAssetsList", assets);

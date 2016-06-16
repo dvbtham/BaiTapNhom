@@ -665,6 +665,9 @@
     <Content Include="Content\Admin\dist\js\deleteConfirm.js" />
     <Content Include="Content\Admin\dist\js\html5shiv.js" />
     <Content Include="Areas\Admin\Views\Post\_AjaxPostList.cshtml" />
+    <Content Include="Areas\Admin\Views\Assets\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Assets\_AjaxAssetsList.cshtml" />
+    <Content Include="Areas\Admin\Views\Assets\Edit.cshtml" />
     <None Include="Content\Admin\dist\js\jquery-1.8.3-vsdoc.js" />
     <Content Include="Content\Admin\dist\js\jquery-1.8.3.js" />
     <Content Include="Content\Admin\dist\js\jquery-1.8.3.min.js" />
@@ -3569,7 +3572,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Views\Assets\" />
     <Folder Include="Areas\Admin\Views\Base\" />
     <Folder Include="Views\AlertMessage\" />
     <Folder Include="Views\Base\" />

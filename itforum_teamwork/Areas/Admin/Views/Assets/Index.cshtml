@@ -5,7 +5,8 @@
     ViewBag.Title = "Danh sách tài nguyên";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
-<h2 class="title text-center">Tài nguyên</h2>
+@section header{
+    Danh sách tài nguyên}
 @using (Ajax.BeginForm("Index", "Assets",
                             new AjaxOptions { UpdateTargetId = "grid-list", HttpMethod = "get", LoadingElementId = "loading", OnBegin = "beginPaging", OnSuccess = "successPaging", OnFailure = "failurePaging" },
                             new { id = "frm-search" }))

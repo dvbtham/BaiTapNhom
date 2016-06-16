@@ -29,6 +29,8 @@
 
         public long? UserID { get; set; }
 
+        public bool Status { get; set; }
+
         [StringLength(150)]
         public string Link { get; set; }
 

@@ -1,0 +1,81 @@
+﻿@using MvcPaging
+@using Model.DAO
+@model IPagedList<Model.EF.Asset>
+
+@{
+    var assetsDAO = new AssetsDAO();
+    var userDao = new UserDAO();
+}
+<div class="table-responsive">
+    <table class="table table-bordered table-hover" cellpadding="5">
+        <thead>
+            <tr>
+                <td>Tiêu đề</td>
+                <td>Danh mục</td>
+                <td>Ngày đăng</td>
+                <td>Người đăng</td>
+                <td>Trạng thái</td>
+            </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            var assetType = assetsDAO.GetAssetTypeByID(item.AssetTypeID);
+            var userModel = userDao.GetUserByID(item.UserID);
+            <tr id="row_@item.UserID">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @assetType.AssetName
+                </td>
+                <td>
+                    @Convert.ToDateTime(item.PostedDate).ToShortDateString()
+                </td>
+                <td>
+                    @userModel.Name
+                </td>
+                <td>
+                    @(item.Status == true ? "Đã duyệt": "Chưa duyệt")
+                </td>
+                <td>
+                    <a href="/Admin/Assets/Edit/@item.AssetID" title="Chỉnh sửa"><i class="fa fa-edit"></i></a>
+                    |
+                    <i class="fa fa-remove" title="Xóa"></i>
+                    @Ajax.ActionLink("Xóa", "Delete", new { @id = @item.AssetID }, new AjaxOptions
+                               {
+                                   Confirm = "Bạn thật sự muốn xóa bản ghi này?",
+                                   OnComplete = "$('#row_" + @item.UserID + "').remove()",
+                                   HttpMethod = "Delete"
+                               })
+                </td>
+
+            </tr>
+        }
+    </table>
+</div>
+
+    <div class="pager">
+        @Html.Raw(Ajax.Pager(
+            new Options
+            {
+                PageSize = Model.PageSize,
+                TotalItemCount = Model.TotalItemCount,
+                CurrentPage = Model.PageNumber,
+                ItemTexts = new ItemTexts() { First = "Trang đầu", Previous = "Trang sau", Next = "Trang kế tiếp", Last = "Trang cuối" },
+                ItemIcon = new ItemIcon() { First = "icon-backward", Previous = "icon-chevron-left", Next = "icon-chevron-right", Last = "icon-forward" },
+                TooltipTitles = new TooltipTitles() { Next = "Trang kế tiếp", Previous = "Trang sau", Page = "Trang {0}.", First = "Về trang đầu", Last = "Đi tới trang cuối" },
+                Size = Size.mini,
+                Alignment = Alignment.centered,
+                IsShowControls = true,
+                IsShowFirstLast = true,
+                CssClass = ""
+            },
+            new AjaxOptions
+            {
+                UpdateTargetId = "grid-list",
+                OnBegin = "beginPaging",
+                OnSuccess = "successPaging",
+                OnFailure = "failurePaging"
+            }, new { controller = "Assets", action = "Index", searchString = ViewBag.SearchString }))
+
+    </div>

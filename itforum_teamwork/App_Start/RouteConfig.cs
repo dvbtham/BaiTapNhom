@@ -102,6 +102,33 @@ namespace itforum_teamwork
                    new { controller = "Confirm", action = "Actived", id = UrlParameter.Optional },
                    new[] { "itforum_teamwork.Controllers" }
                );
+            //Taif nguyeen
+            routes.MapRoute(
+                   "Xem tai nguyen",
+                   "tai-nguyen/{metatitle}-{id}",
+                   new { controller = "Assets", action = "Details", id = UrlParameter.Optional },
+                   new[] { "itforum_teamwork.Controllers" }
+               );
+            routes.MapRoute(
+                   "Xem tai nguyen theo nguoi dang",
+                   "tai-nguyen/nguoi-dang/{metatitle}-{id}",
+                   new { controller = "Assets", action = "AssetByUser", id = UrlParameter.Optional },
+                   new[] { "itforum_teamwork.Controllers" }
+               );
+            routes.MapRoute(
+                   "Xem tai nguyen theo danh muc",
+                   "tai-nguyen/the-loai/{metatitle}-{id}",
+                   new { controller = "Assets", action = "AssetByAssType", id = UrlParameter.Optional },
+                   new[] { "itforum_teamwork.Controllers" }
+               );
+            routes.MapRoute(
+                   "Danh sach tai nguyen ",
+                   "tai-nguyen",
+                   new { controller = "Assets", action = "Index", id = UrlParameter.Optional },
+                   new[] { "itforum_teamwork.Controllers" }
+               );
+            
+
 
             //Default
             routes.MapRoute(

@@ -12,6 +12,9 @@
     {
         var assetType = assetsDAO.GetAssetTypeByID(item.AssetTypeID);
         var userModel = userDao.GetUserByID(item.UserID);
+        var readMore = "/tai-nguyen/" + itforum_teamwork.Common.ConvertToUnsign.ConvertToUnSign(item.Title).ToLower() + "-" + item.AssetID;
+        var byUser = "/tai-nguyen/nguoi-dang/" + itforum_teamwork.Common.ConvertToUnsign.ConvertToUnSign(userModel.Name).ToLower() + "-" + item.UserID;
+        var byType = "/tai-nguyen/the-loai/" + itforum_teamwork.Common.ConvertToUnsign.ConvertToUnSign(assetType.AssetName).ToLower() + "-" + item.AssetTypeID;
 
         <div class="col-sm-12 ">
             <div class="col-sm-4 post_info">
@@ -20,15 +23,18 @@
                 </div>
             </div>
             <div class="col-sm-7 col-sm-offset-1">
-                <a href="" id="viewPost"><h4>@item.Title</h4></a>
-                <div class="post-meta"><i class="fa fa-user"></i><a href=""> @userModel.Name </a>
-                        <i class="fa fa-th-list"></i><a href=""> @assetType.AssetName </a>
-                        <i class="fa fa-calendar"></i> @item.PostedDate
-                        <i class="fa fa-eye"></i> @item.Views
-                </div>
-                <p>@Html.Raw(item.Content)</p>
+                <a href="@readMore" id="viewPost"><h4>@item.Title</h4></a>
+                <div class="post-meta">
+                    <i class="fa fa-user"></i><a href="@byUser"> @userModel.Name </a>
+                    <i class="fa fa-th-list"></i><a href="@byType">
+    @assetType.AssetName</a>
+                    <i class="fa fa-calendar"></i> @item.PostedDate
+                    <i class="fa fa-eye"></i> @item.Views
+</div>
+                <hr />
+                <p>@Html.Raw(item.ShortContent)</p>
                 <button class="btn btn-primary">
-                    <a href=""> Chi tiết </a><span class="glyphicon glyphicon-chevron-right"></span>
+                    <a href="@readMore"> Chi tiết </a><span class="glyphicon glyphicon-chevron-right"></span>
                 </button>
             </div>
         </div>

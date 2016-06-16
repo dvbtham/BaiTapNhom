@@ -31,5 +31,13 @@ namespace Model.DAO
         {
             return db.AssetTypes.Find(id);
         }
+        public List<Asset> ByAssetTypeID(int id)
+        {
+            return db.Assets.Where(x => x.AssetTypeID == id).ToList();
+        }
+        public List<Asset> ByUserID(long id)
+        {
+            return db.Assets.Where(x => x.UserID == id).ToList();
+        }
     }
 }

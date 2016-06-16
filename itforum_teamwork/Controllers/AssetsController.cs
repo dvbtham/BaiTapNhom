@@ -23,7 +23,7 @@ namespace itforum_teamwork.Controllers
             }
             else
             {
-                assets = assets.Where(x => x.Title.Contains(searchString)|| x.Content.Contains(searchString)).ToPagedList(currentPageIndex, defaultPageSize);
+                assets = assets.Where(x => x.Title.Contains(searchString) || x.Content.Contains(searchString)).ToPagedList(currentPageIndex, defaultPageSize);
             }
             if (Request.IsAjaxRequest())
                 return PartialView("_AjaxAssetsList", assets);
@@ -36,7 +36,28 @@ namespace itforum_teamwork.Controllers
             var modelFirst = new AssetsDAO().ViewDetail(id);
             if (modelFirst == null)
                 return RedirectToAction("Index", "Error");
-            return View();
+            return View(modelFirst);
+        }
+       
+        public ActionResult AssetByUser(int? page, long id)
+        {
+            IList<Asset> assets = new AssetsDAO().ByUserID(id);
+            int currentPageIndex = page.HasValue ? page.Value : 1;
+            assets = assets.ToPagedList(currentPageIndex, defaultPageSize);
+            if (Request.IsAjaxRequest())
+                return PartialView("_AjaxAssetsList", assets);
+            else
+                return View(assets);
+        }
+        public ActionResult AssetByAssType(int? page, int id)
+        {
+            IList<Asset> assets = new AssetsDAO().ByAssetTypeID(id);
+            int currentPageIndex = page.HasValue ? page.Value : 1;
+            assets = assets.ToPagedList(currentPageIndex, defaultPageSize);
+            if (Request.IsAjaxRequest())
+                return PartialView("_AjaxAssetsList", assets);
+            else
+                return View(assets);
         }
     }
 }

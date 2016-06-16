@@ -1,4 +1,4 @@
-namespace Model.EF
+﻿namespace Model.EF
 {
     using System;
     using System.Collections.Generic;
@@ -17,7 +17,12 @@ namespace Model.EF
 
         public string Content { get; set; }
         public string Image { get; set; }
+
+        [DataType(DataType.Date)]
         public DateTime? EditedDate { get; set; }
+
+        [StringLength(500, ErrorMessage = "Nhập không quá 500 ký tự")]
+        public string ShortContent { get; set; }
 
         public DateTime? PostedDate { get; set; }
         public long? Views { get; set; }
@@ -26,6 +31,9 @@ namespace Model.EF
 
         [StringLength(150)]
         public string Link { get; set; }
+
+        [StringLength(500, ErrorMessage = "Nhập không quá 500 ký tự")]
+        public string LinkDuPhong { get; set; }
 
         public virtual AssetType AssetType { get; set; }
 

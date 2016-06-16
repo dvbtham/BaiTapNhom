@@ -3563,6 +3563,9 @@
     <Content Include="Views\Confirm\Actived.cshtml" />
     <Content Include="Views\Assets\_AjaxAssetsList.cshtml" />
     <Content Include="Views\Assets\Index.cshtml" />
+    <Content Include="Views\Assets\Details.cshtml" />
+    <Content Include="Views\Assets\AssetByUser.cshtml" />
+    <Content Include="Views\Assets\AssetByAssType.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

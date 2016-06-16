@@ -189,6 +189,7 @@
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
     <Compile Include="Areas\Admin\Models\Account.cs" />
     <Compile Include="Areas\Admin\Models\ArticleViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\AssetViewModel.cs" />
     <Compile Include="Areas\Admin\Models\LoginModel.cs" />
     <Compile Include="Areas\Admin\Models\UserViewModel.cs" />
     <Compile Include="Common\CommonConstants.cs" />
@@ -668,6 +669,7 @@
     <Content Include="Areas\Admin\Views\Assets\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Assets\_AjaxAssetsList.cshtml" />
     <Content Include="Areas\Admin\Views\Assets\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Assets\Create.cshtml" />
     <None Include="Content\Admin\dist\js\jquery-1.8.3-vsdoc.js" />
     <Content Include="Content\Admin\dist\js\jquery-1.8.3.js" />
     <Content Include="Content\Admin\dist\js\jquery-1.8.3.min.js" />

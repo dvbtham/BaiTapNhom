@@ -23,13 +23,19 @@ namespace itforum_teamwork.Areas.Admin.Controllers
                 UserDAO userDAO = new UserDAO();
                 userDAO.Login(account.Email, Encryptor.MD5Hash(account.Password));
                 var user = userDAO.GetUserByEmail(account.Email);
+                if (user != null)
+                {
+                    var userSession = new UserLogin();
+                    userSession.Email = user.Email;
+                    userSession.UserID = user.UserID;
 
-                var userSession = new UserLogin();
-                userSession.Email = user.Email;
-                userSession.UserID = user.UserID;
-
-                Session.Add(CommonConstants.ADMIN_USER_SESSION, userSession);
-                return RedirectToAction("Index", "Home");
+                    Session.Add(CommonConstants.ADMIN_USER_SESSION, userSession);
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    return View();
+                }
             }
         }
 

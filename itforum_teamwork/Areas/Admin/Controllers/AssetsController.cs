@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MvcPaging;
+using itforum_teamwork.Areas.Admin.Models;
 
 namespace itforum_teamwork.Areas.Admin.Controllers
 {
@@ -51,10 +52,53 @@ namespace itforum_teamwork.Areas.Admin.Controllers
                 }
                 else
                 {
-                    SetAlert("Cập nhật thành công", "success");
+                    SetAlert("Cập nhật không thành công", "success");
                     return View();
                 }
 
+            }
+            else
+            {
+                ModelState.AddModelError("", "Lỗi");
+            }
+            return View("Index");
+        }
+        [HttpGet]
+        public ActionResult Create()
+        {
+            SetViewBag();
+            SetTypeName();
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Create(AssetViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var dao = new AssetsDAO();
+                var asset = new Asset();
+                asset.Title = model.Title;
+                asset.Link = model.Link;
+                asset.LinkDuPhong = model.LinkDuPhong;
+                asset.PostedDate = DateTime.Now;
+                asset.Status = true;
+                asset.UserID = model.UserID;
+                if (!string.IsNullOrEmpty(model.Image))
+                    asset.Image = model.Title;
+                else
+                    asset.Image = "/Data/images/ArticleImg/no_image.png";
+                asset.AssetTypeID = model.AssetTypeID;
+                var res = dao.Create(asset);
+                if(res)
+                {
+                    SetAlert("Thêm thành công", "success");
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    SetAlert("Thêm không thành công", "error");
+                    return View();
+                }
             }
             else
             {

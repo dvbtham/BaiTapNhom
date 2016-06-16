@@ -1,13 +1,14 @@
-﻿namespace Model.EF
-{
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Web;
 
-    public partial class Asset
+namespace itforum_teamwork.Areas.Admin.Models
+{
+    public class AssetViewModel
     {
+        [Key]
         [Display(Name = "ID")]
         public long AssetID { get; set; }
 
@@ -15,7 +16,6 @@
         [Display(Name = "Tiêu đề")]
         public string Title { get; set; }
 
-        [Display(Name = "Danh mục")]
         public int AssetTypeID { get; set; }
 
         [Display(Name = "Nội dung")]
@@ -40,7 +40,6 @@
         [Display(Name = "Lượt xem")]
         public long? Views { get; set; }
 
-        [Display(Name = "Người đăng")]
         public long? UserID { get; set; }
         [Display(Name = "Trạng thái")]
         public bool Status { get; set; }
@@ -49,12 +48,8 @@
         [StringLength(150)]
         public string Link { get; set; }
 
-        [Display(Name = "Link dự phòng")]
+        [Display(Name="Link dự phòng")]
         [StringLength(500, ErrorMessage = "Nhập không quá 500 ký tự")]
         public string LinkDuPhong { get; set; }
-
-        public virtual AssetType AssetType { get; set; }
-
-        public virtual User User { get; set; }
     }
 }

@@ -24,6 +24,7 @@ namespace Model.EF
         public virtual DbSet<AssetType> AssetTypes { get; set; }
         public virtual DbSet<SocialNetwork> SocialNetworks { get; set; }
         public virtual DbSet<SocNetType> SocNetTypes { get; set; }
+        public virtual DbSet<Feedback> Feedbacks { get; set; }
         public virtual DbSet<Tag> Tags { get; set; }
         public virtual DbSet<SourceCode> SourceCodes { get; set; }
         public virtual DbSet<User> Users { get; set; }

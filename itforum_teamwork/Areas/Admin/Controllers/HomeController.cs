@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Model.DAO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,6 +12,10 @@ namespace itforum_teamwork.Areas.Admin.Controllers
         // GET: Admin/Home
         public ActionResult Index()
         {
+            ViewBag.PostsCounter = new CategoryDAO().GetItemNumber();
+            ViewBag.UsersCounter = new UserDAO().UserCounter();
+            ViewBag.TagsCounter = new TagDAO().TagsCounter();
+            ViewBag.FeBaCounter = new FeedBackDAO().FeBaCounter();
             return View();
         }
     }

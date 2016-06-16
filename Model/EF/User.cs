@@ -43,6 +43,7 @@
         public string Phone { get; set; }
 
         [Display(Name = "Ngày đăng ký")]
+        [DataType(DataType.Date)]
         public DateTime? CreatedDate { get; set; }
 
         [Display(Name = "Quyền")]

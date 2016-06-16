@@ -48,6 +48,7 @@
         public string ImageShowOnHome { get; set; }
 
         [Display(Name = "Ngày đăng")]
+        [DataType(DataType.Date)]
         public DateTime? PostedDate { get; set; }
 
         [Display(Name = "Lượt xem")]

@@ -15,6 +15,10 @@ namespace Model.DAO
         {
             db = new itforumEntities();
         }
+        public int TagsCounter()
+        {
+            return db.Tags.Count();
+        }
         public List<Tag> ListAll()
         {
             return db.Tags.ToList();

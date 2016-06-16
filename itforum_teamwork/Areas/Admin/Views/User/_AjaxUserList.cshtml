@@ -1,10 +1,18 @@
 ﻿@using MvcPaging
 @model IPagedList<Model.EF.User>
 
-<script src="~/Content/Admin/js/jsControllers/userController.js"></script>
-
+@*<script src="~/Content/Admin/js/jsControllers/userController.js"></script>
+<script src="~/Content/Admin/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
+<script src="~/Content/Admin/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#dataTables-user').DataTable({
+            responsive: true
+        });
+    });
+</script>*@
 <div class="table-responsive">
-    <table class="table table-hover" border="1">
+    <table class="table table-hover" id="dataTables-user" border="1">
         <thead>
             <tr>
                 <th>
@@ -72,10 +80,10 @@
         }
 
     </table>
-    <div class="well">
-        Hiển thị <span class="badge badge-success">@Model.ItemStart</span> tới <span class="badge badge-info">@Model.ItemEnd</span>
-        của <span class="badge badge-info">@Model.TotalItemCount</span> kết quả
-    </div>
+</div>
+<div class="well">
+    Hiển thị <span class="badge badge-success">@Model.ItemStart</span> tới <span class="badge badge-info">@Model.ItemEnd</span>
+    của <span class="badge badge-info">@Model.TotalItemCount</span> kết quả
 </div>
 <div class="pager">
     @Html.Raw(Ajax.Pager(

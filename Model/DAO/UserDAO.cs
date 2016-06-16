@@ -25,7 +25,10 @@ namespace Model.DAO
         {
             return db.Users.ToList();
         }
-
+        public int UserCounter()
+        {
+            return db.Users.Count();
+        }
         public User GetUserByID(long? id)
         {
             var user = db.Users.SingleOrDefault(x => x.UserID == id);

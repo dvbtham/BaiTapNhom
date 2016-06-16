@@ -40,5 +40,10 @@ namespace Model.DAO
             var post = db.Posts.Count(x => x.CategoryID == id);
             return post;
         }
+        public int GetItemNumber()
+        {
+            var post = db.Posts.Count();
+            return post;
+        }
     }
 }

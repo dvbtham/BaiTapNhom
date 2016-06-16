@@ -69,6 +69,7 @@
     <Compile Include="DAO\CategoryDAO.cs" />
     <Compile Include="DAO\CommentDAO.cs" />
     <Compile Include="DAO\ContactDAO.cs" />
+    <Compile Include="DAO\FeedBackDAO.cs" />
     <Compile Include="DAO\ManageDAO.cs" />
     <Compile Include="DAO\PictureDAO.cs" />
     <Compile Include="DAO\PostTagDAO.cs" />
@@ -80,6 +81,7 @@
     <Compile Include="EF\Category.cs" />
     <Compile Include="EF\Comment.cs" />
     <Compile Include="EF\Contact.cs" />
+    <Compile Include="EF\FeedBack.cs" />
     <Compile Include="EF\itforumEntities.cs" />
     <Compile Include="EF\Picture.cs" />
     <Compile Include="EF\Post.cs" />

@@ -1,60 +1,107 @@
 ﻿@using MvcPaging;
-@model IPagedList<Model.EF.User>
+    @model IPagedList<Model.EF.User>
 
-@{
-    ViewBag.Title = "Trang chủ Admin";
-    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
-}
+    @{
+        ViewBag.Title = "Trang chủ Admin";
+        Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    }
 
-@section header
-{
-    Danh sách người dùng
-}
+    @section header
+    {
+        Danh sách người dùng
+    }
 
 
-<h5>
-    @Html.ActionLink("Thêm mới người dùng", "Signup")
-</h5>
+    <h5>
+        @Html.ActionLink("Thêm mới người dùng", "Signup")
+    </h5>
 
-@using (Ajax.BeginForm("Index", "User",
-                            new AjaxOptions { UpdateTargetId = "grid-list", HttpMethod = "get", LoadingElementId = "loading", OnBegin = "beginPaging", OnSuccess = "successPaging", OnFailure = "failurePaging" },
-                            new { id = "frm-search" }))
-{
-    <div class="container">
-        <div class="row">
-            <div id="custom-search-input">
-                <div class="input-group col-md-4">
-                    <input type="text" value="@ViewBag.SearchString" name="searchString" class="search-query form-control" placeholder="Search" />
-                    <span class="input-group-btn">
-                        <button class="btn btn-danger" type="button">
-                            <span class=" glyphicon glyphicon-search"></span>
-                        </button>
-                    </span>
+    @using (Ajax.BeginForm("Index", "User",
+                                new AjaxOptions { UpdateTargetId = "grid-list", HttpMethod = "get", LoadingElementId = "loading", OnBegin = "beginPaging", OnSuccess = "successPaging", OnFailure = "failurePaging" },
+                                new { id = "frm-search" }))
+    {
+        <div class="container">
+            <div class="row">
+                <div id="custom-search-input">
+                    <div class="input-group col-md-4">
+                        <input type="text" value="@ViewBag.SearchString" name="searchString" class="search-query form-control" placeholder="Search" />
+                        <span class="input-group-btn">
+                            <button class="btn btn-danger" type="button">
+                                <span class=" glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <hr />
-    <div id="grid-list">
-        @{ Html.RenderPartial("_AjaxUserList", Model); }
-    </div>
+        <hr />
+        <div id="grid-list">
+            @{ Html.RenderPartial("_AjaxUserList", Model); }
+        </div>
+    }
+    <br />
+    <script type="text/javascript">
+
+        function beginPaging(args) {
+            // Animate
+            $('#grid-list').fadeOut('normal');
+        }
+
+        function successPaging() {
+            // Animate
+            $('#grid-list').fadeIn('normal');
+            $('a').tooltip();
+        }
+
+        function failurePaging() {
+            alert("Could not retrieve list.");
+        }
+
+    </script>
+
+@*@{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.Title = "Danh sách người dùng";
+    
+    
+    <link href="~/Content/DataTables/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 }
-<br />
+
+
 <script type="text/javascript">
+    $(document).ready(function () {
+        $('#tblUser').dataTable({
+            "searching": true,
+            "ordering": true,
+            "pagingType": "full_numbers",
+            "ajax": {
+                "url": "/Admin/User/getUsers",
+                "type": "GET"
+            },
+            "columns": [
+                { "data": "ID" },
+                { "data": "Email" },
+                { "data": "Name" },
+                { "data": "Phone" },
+                { "data": "ConfirmedByEmail" },
+                { "data": "Status" }
+            ]
+        });
+        //$.fn.dataTable.ext.errMode = 'throw';
 
-    function beginPaging(args) {
-        // Animate
-        $('#grid-list').fadeOut('normal');
-    }
-
-    function successPaging() {
-        // Animate
-        $('#grid-list').fadeIn('normal');
-        $('a').tooltip();
-    }
-
-    function failurePaging() {
-        alert("Could not retrieve list.");
-    }
-
+    });
 </script>
+<table id="tblUser" cellspacing="0">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Email</th>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>ConfirmedByEmail</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+</table>*@

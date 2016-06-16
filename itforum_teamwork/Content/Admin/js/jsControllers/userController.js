@@ -1,4 +1,5 @@
-﻿var user = {
+﻿/// <reference path="userController.js" />
+var user = {
     init: function () {
         user.registerEvents();
     },

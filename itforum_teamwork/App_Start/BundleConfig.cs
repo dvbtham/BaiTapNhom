@@ -30,9 +30,8 @@ namespace itforum_teamwork
 
             //js admin
             bundles.Add(new ScriptBundle("~/bundles/jsadmin").Include(
-                     "~/Content/Client/js/jquery.js",
+                     "~/Scripts/jquery-1.10.2.min.js",
                      "~/Content/Client/js/bootstrap.min.js",
-                     "~/Scripts/jquery-{version}.js",
                      "~/Scripts/jquery.validate.js",
                      "~/scripts/jquery.validate.unobtrusive.js",
                      "~/Scripts/jquery.validate.unobtrusive-custom-for-bootstrap.js",
@@ -41,7 +40,8 @@ namespace itforum_teamwork
                      "~/Content/Admin/plugins/ckeditor/ckeditor.js",
                      "~/Content/Admin/bower_components/metisMenu/dist/metisMenu.min.js",
                      "~/Content/Admin/dist/js/sb-admin-2.js",
-                     "~/Content/Client/js/alertstyle.js"));
+                     "~/Content/Client/js/alertstyle.js",
+                      "~/Scripts/DataTables/jquery.dataTables.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jsadminController").Include(
                      "~/Content/Admin/js/jsControllers/userController.js"));
@@ -53,7 +53,12 @@ namespace itforum_teamwork
                        "~/Content/Admin/bower_components/bootstrap/dist/css/icon-bootstrap.css",
                       "~/Content/Admin/bower_components/metisMenu/dist/metisMenu.min.css",
                       "~/Content/Admin/dist/css/sb-admin-2.css",
+                      "~/Content/DataTables/css/dataTables.bootstrap.min.css",
                       "~/Content/Admin/bower_components/font-awesome/css/font-awesome.min.css"));
+
+            bundles.Add(new StyleBundle("~/bundles/tablecss").Include(
+                      "~/Content/DataTables/css/dataTables.bootstrap.min.css"));
+
 
 
             BundleTable.EnableOptimizations = false;

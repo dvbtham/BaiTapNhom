@@ -34,6 +34,20 @@ namespace itforum_teamwork.Areas.Admin.Controllers
             else
                 return View(users);
         }
+        //public ActionResult Index()
+        //{
+        //    return View();
+        //}
+        //[HttpGet]
+        //public JsonResult getUsers()
+        //{
+        //    var jsonData = new
+        //    {
+        //        data = new UserDAO().ListUser()
+        //    };
+        //    return Json(jsonData, JsonRequestBehavior.AllowGet);
+
+        //} 
         [HttpGet]
         public ActionResult Signup()
         {

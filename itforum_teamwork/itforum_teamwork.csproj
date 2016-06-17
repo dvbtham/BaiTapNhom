@@ -200,6 +200,8 @@
     <Compile Include="Areas\Admin\Models\AssetViewModel.cs" />
     <Compile Include="Areas\Admin\Models\LoginModel.cs" />
     <Compile Include="Areas\Admin\Models\UserViewModel.cs" />
+    <Compile Include="Hubs\CounterHub.cs" />
+    <Compile Include="Startup.cs" />
     <Compile Include="Common\CommonConstants.cs" />
     <Compile Include="Common\ConvertToUnsign.cs" />
     <Compile Include="Common\Encryptor.cs" />

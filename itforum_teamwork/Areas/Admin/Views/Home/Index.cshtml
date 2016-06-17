@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Trang chủ";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
@@ -8,6 +7,22 @@
 {
     Trang chủ
 }
+@section jsFooter{
+    <script src="~/Scripts/jquery.signalR-2.2.0.min.js"></script>
+    <script src="~/signalr/hubs"></script>
+    <script>
+        $(function () {
+            var counterHub = $.connection.counterHub;
+            $.connection.hub.start().done(function () {
+
+            });
+            counterHub.client.UpdateCount = function (count) {
+                $('#counter').text(count);
+            }
+        });
+    </script>
+}
+
 <!-- /.row -->
 <div class="row">
     <div class="col-lg-3 col-md-6">
@@ -98,6 +113,20 @@
             </a>
         </div>
     </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-user fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge"> <strong id="counter"><i></i></strong></div>
+                        <div>Online !</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <!-- /.row -->
-

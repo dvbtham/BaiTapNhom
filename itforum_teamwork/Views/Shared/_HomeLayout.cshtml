@@ -160,14 +160,9 @@
         </div>
 
     </footer><!--/Footer-->
+    @Scripts.Render("~/bundles/jscore")
 
-
-    <script src="/Content/Client/js/jquery.js"></script>
-    <script src="/Content/Client/js/bootstrap.min.js"></script>
-    <script src="/Content/Client/js/jquery.scrollUp.min.js"></script>
-    <script src="/Content/Client/js/price-range.js"></script>
-    <script src="/Content/Client/js/jquery.prettyPhoto.js"></script>
-    <script src="/Content/Client/js/main.js"></script>
+    @RenderSection("jsFooter", required: false)
     
 </body>
 </html>

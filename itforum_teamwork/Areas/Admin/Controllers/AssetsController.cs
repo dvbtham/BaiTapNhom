@@ -40,6 +40,7 @@ namespace itforum_teamwork.Areas.Admin.Controllers
             return View(model);
         }
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult Edit(Asset model)
         {
             if (ModelState.IsValid)
@@ -71,6 +72,7 @@ namespace itforum_teamwork.Areas.Admin.Controllers
             return View();
         }
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult Create(AssetViewModel model)
         {
             if (ModelState.IsValid)
@@ -83,6 +85,9 @@ namespace itforum_teamwork.Areas.Admin.Controllers
                 asset.PostedDate = DateTime.Now;
                 asset.Status = true;
                 asset.UserID = model.UserID;
+                asset.ShortContent = model.ShortContent;
+                asset.Content = model.Content;
+                asset.Views = 0;
                 if (!string.IsNullOrEmpty(model.Image))
                     asset.Image = model.Title;
                 else

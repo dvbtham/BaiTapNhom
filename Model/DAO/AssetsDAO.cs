@@ -65,6 +65,9 @@ namespace Model.DAO
                 myModel.AssetTypeID = model.AssetTypeID;
                 myModel.LinkDuPhong = model.LinkDuPhong;
                 myModel.EditedDate = DateTime.Now;
+                myModel.ShortContent = model.ShortContent;
+                myModel.Content = model.Content;
+                myModel.Views = model.Views;
                 db.Entry(myModel);
                 db.SaveChanges();
                 return true;

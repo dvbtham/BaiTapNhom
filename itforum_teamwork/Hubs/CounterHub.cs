@@ -18,7 +18,8 @@ namespace itforum_teamwork.Hubs
         }
         public override Task OnDisconnected(bool stopCalled)
         {
-            counter -= 1;
+            if (counter > 0)
+                counter -= 1;
             Clients.All.UpdateCount(counter);
             return base.OnDisconnected(stopCalled);
         }

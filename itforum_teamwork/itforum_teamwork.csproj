@@ -700,6 +700,7 @@
     <Content Include="Content\Admin\js\flot-data.js" />
     <Content Include="Content\Admin\js\jsControllers\userController.js" />
     <Content Include="Content\Admin\js\jsControllers\viewPost.js" />
+    <Content Include="Content\Admin\js\jsCounterHub\jsHitCounter.js" />
     <Content Include="Content\Admin\js\morris-data.js" />
     <Content Include="Content\Admin\js\myFinder.js" />
     <Content Include="Content\Admin\pages\blank.html" />

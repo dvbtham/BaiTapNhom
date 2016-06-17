@@ -41,7 +41,9 @@
     <!-- /#wrapper -->
     <!-- jQuery -->
     @Scripts.Render("~/bundles/jsadmin")
-  
+    <script src="~/Scripts/jquery.signalR-2.2.0.min.js"></script>
+    <script src="~/signalr/hubs"></script>
+    <script src="~/Content/Admin/js/jsCounterHub/jsHitCounter.js"></script>
 
     @RenderSection("jsFooter", required: false)
 </body>

@@ -7,21 +7,6 @@
 {
     Trang chủ
 }
-@section jsFooter{
-    <script src="~/Scripts/jquery.signalR-2.2.0.min.js"></script>
-    <script src="~/signalr/hubs"></script>
-    <script>
-        $(function () {
-            var counterHub = $.connection.counterHub;
-            $.connection.hub.start().done(function () {
-
-            });
-            counterHub.client.UpdateCount = function (count) {
-                $('#counter').text(count);
-            }
-        });
-    </script>
-}
 
 <!-- /.row -->
 <div class="row">

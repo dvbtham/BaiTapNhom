@@ -45,6 +45,9 @@ namespace itforum_teamwork
 
             bundles.Add(new ScriptBundle("~/bundles/jsadminController").Include(
                      "~/Content/Admin/js/jsControllers/userController.js"));
+            bundles.Add(new ScriptBundle("~/bundles/jsHubCounter").Include(
+                     "~/Scripts/jquery.signalR-2.2.0.min.js",
+                     "~/signalr/hubs"));
 
             //css admin
             bundles.Add(new StyleBundle("~/bundles/cssadmin").Include(

@@ -5,9 +5,10 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,300,400italic,500,700,100);
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,800,300,600,700);
 @import url(http://fonts.googleapis.com/css?family=Abel);
+@import url(https://fonts.googleapis.com/css?family=Arima+Madurai);
 
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Arima Madurai', cursive;
     position: relative;
     font-weight: 400;
 }
@@ -159,7 +160,7 @@ ul.tab-content {
 
     ul.tab-content li a {
         padding: 0px 5px 0px 5px;
-        font-family: Arial, Helvetica, sans-serif;
+         font-family: 'Arima Madurai', cursive;
         text-transform: capitalize;
         color: black;
     }

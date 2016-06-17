@@ -2,15 +2,16 @@
 @model IPagedList<Model.EF.User>
 
 @*<script src="~/Content/Admin/js/jsControllers/userController.js"></script>
-<script src="~/Content/Admin/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
-<script src="~/Content/Admin/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
-<script>
-    $(document).ready(function () {
-        $('#dataTables-user').DataTable({
-            responsive: true
+    <script src="~/Content/Admin/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="~/Content/Admin/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#dataTables-user').DataTable({
+                responsive: true
+            });
         });
-    });
-</script>*@
+    </script>*@
+
 <div class="table-responsive">
     <table class="table table-hover" id="dataTables-user" border="1">
         <thead>

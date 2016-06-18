@@ -17,7 +17,7 @@ namespace Model.DAO
 
         public Contact GetContactInfo()
         {
-            return db.Contacts.Single(x => x.Status == true);
+            return db.Contacts.SingleOrDefault(x => x.Status == true);
         }
     }
 }

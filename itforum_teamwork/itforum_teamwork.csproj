@@ -39,6 +39,18 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <FilesToIncludeForPublish>AllFilesInTheProject</FilesToIncludeForPublish>
+    <PublishDatabaseSettings>
+      <Objects>
+        <ObjectGroup Name="itforumEntities-Deployment" Order="1">
+          <Destination Path="workstation id=codtodatabase.mssql.somee.com%3bpacket size=4096%3buser id=codto_login%3bpwd=thambn811996%3bdata source=codtodatabase.mssql.somee.com%3bpersist security info=False%3binitial catalog=codtodatabase" />
+          <Object Type="DbFullSql">
+            <PreSource Path="Data Source=.%3bInitial Catalog=itForum_2142016%3bPersist Security Info=True%3bUser ID=sa%3bPassword=123%3bApplication Name=EntityFramework" ScriptSchema="True" ScriptData="False" CopyAllFullTextCatalogs="False" DriDefaults="True" />
+            <Source Path="obj\Release\AutoScripts\itforumEntities-Deployment_SchemaOnly.sql" Transacted="True" />
+          </Object>
+        </ObjectGroup>
+      </Objects>
+    </PublishDatabaseSettings>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CKFinder, Version=2.6.0.2792, Culture=neutral, PublicKeyToken=579e7adc719a1423, processorArchitecture=MSIL">
@@ -3584,6 +3596,8 @@
     <Content Include="Views\Assets\Details.cshtml" />
     <Content Include="Views\Assets\AssetByUser.cshtml" />
     <Content Include="Views\Assets\AssetByAssType.cshtml" />
+    <Content Include="Views\Contact\_ContactPartial.cshtml" />
+    <Content Include="Views\Contact\TopContactInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

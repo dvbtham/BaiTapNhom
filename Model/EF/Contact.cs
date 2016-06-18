@@ -12,9 +12,12 @@
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ContactID { get; set; }
 
-        [Column(TypeName = "ntext")]
-
-        public string Content { get; set; }
+        [StringLength(250, ErrorMessage = "Chỉ nhập tối đa 250 ký tự")]
+        public string Slogan { get; set; }
+        public string Email { get; set; }
+        public string Phone { get; set; }
+        public string Fax { get; set; }
+        public string Address { get; set; }
 
         public bool? Status { get; set; }
 

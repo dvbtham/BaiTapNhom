@@ -13,6 +13,11 @@ body {
     font-weight: 400;
 }
 
+#slogan {
+    border-bottom: 1px solid #eaa34c;
+    margin-bottom: 5px;
+}
+
 ::selection {
     background-color: #FE980F;
     color: #fff;
@@ -56,9 +61,11 @@ span > a {
 .img-circle {
     border: 2px solid orange;
 }
-.pointer{
-    cursor:pointer;
+
+.pointer {
+    cursor: pointer;
 }
+
 .italic {
     font-style: italic;
 }
@@ -76,6 +83,7 @@ hr {
     margin: 10px 10px;
     padding: 0;
 }
+
 .hr-100 {
     display: block;
     width: 100%;
@@ -85,7 +93,8 @@ hr {
     margin: 10px 10px;
     padding: 0;
 }
- .orange {
+
+.orange {
     color: orange;
 }
 
@@ -160,7 +169,7 @@ ul.tab-content {
 
     ul.tab-content li a {
         padding: 0px 5px 0px 5px;
-         font-family: 'Arima Madurai', cursive;
+        font-family: 'Arima Madurai', cursive;
         text-transform: capitalize;
         color: black;
     }

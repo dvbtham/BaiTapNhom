@@ -59,5 +59,15 @@ namespace itforum_teamwork.Controllers
         {
             return View();
         }
+        public PartialViewResult _ContactPartial()
+        {
+            var myInfo = new ContactDAO().GetContactInfo();
+            return PartialView(myInfo);
+        }
+        public PartialViewResult TopContactInfo()
+        {
+            var myInfo = new ContactDAO().GetContactInfo();
+            return PartialView(myInfo);
+        }
     }
 }

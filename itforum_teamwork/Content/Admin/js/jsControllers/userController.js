@@ -17,10 +17,10 @@ var user = {
                 success: function (response) {
                     console.response
                     if (response.status) {
-                        btn.text("Đã kích hoạt")
+                        btn.text("Khóa")
                     }
                     else
-                        btn.text("Chưa kích hoạt")
+                        btn.text("Mở khóa")
                 }
             });
         });

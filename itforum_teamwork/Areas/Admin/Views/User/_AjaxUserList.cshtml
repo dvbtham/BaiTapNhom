@@ -63,7 +63,7 @@
                     @(item.ConfirmedByEmail == true ? "Đã xác nhận" : "Chưa xác nhận")
                 </td>
                 <td>
-                    <a href="#" class="btn-active" data-id="@item.UserID">@(item.Status ? "Đã kích hoạt" : "Chưa kích hoạt")</a>
+                    <span>@(item.Status ? "Đã kích hoạt" : "Chưa kích hoạt")</span> <a href="#" class="btn-active" data-id="@item.UserID"> @(item.Status ? "Khóa" : "Mở khóa")</a>
                 </td>
                 <td>
                     <a href="/Admin/User/Edit/@item.UserID" title="Sửa"><i class="fa fa-edit"></i></a>

@@ -37,21 +37,21 @@ namespace Model.DAO
             IQueryable<Post> model = db.Posts.Where(x => x.UserID == id && x.Status == true);
             if (!string.IsNullOrEmpty(searchString))
             {
-                model = model.Where(x => x.Title.Contains(searchString) || x.Content.Contains(searchString) || x.Detail.Contains(searchString));
+                model = model.Where(x => x.Title.Contains(searchString) || x.Content.Contains(searchString) || x.Detail.Contains(searchString) && x.Status == true);
             }
             return model.OrderByDescending(x => x.PostedDate).ToPagedList(page, pageSize);
         }
         public IEnumerable<Post> GetListByCatID(long id, int page, int pageSize)
         {
             IQueryable<Post> model = db.Posts;
-            model = model.Where(x => x.CategoryID == id);
+            model = model.Where(x => x.CategoryID == id && x.Status == true);
 
             return model.OrderByDescending(x => x.PostedDate).ToPagedList(page, pageSize);
         }
         //Danh sách 10 bài viết nổi bật
         public List<Post> GetArticleTop10()
         {
-            return db.Posts.OrderByDescending(x => x.Views).Take(10).ToList();
+            return db.Posts.Where(x => x.Status == true).OrderByDescending(x => x.Views).Take(10).ToList();
         }
         //set name
         public List<Post> ListPostAll()
@@ -125,21 +125,21 @@ namespace Model.DAO
 
         public List<Post> GetHotArticle()
         {
-            return db.Posts.OrderByDescending(x => x.Views).Take(5).ToList();
+            return db.Posts.Where(x => x.Status == true).OrderByDescending(x => x.Views).Take(5).ToList();
         }
 
 
         public IEnumerable<Post> GetListByUserID(long id, int page, int pageSize)
         {
             IQueryable<Post> model = db.Posts;
-            model = model.Where(x => x.UserID == id);
+            model = model.Where(x => x.UserID == id && x.Status == true);
 
             return model.OrderByDescending(x => x.PostedDate).ToPagedList(page, pageSize);
         }
 
         public IEnumerable<Post> GetListPaging(int page, int pageSize)
         {
-            IQueryable<Post> model = db.Posts;
+            IQueryable<Post> model = db.Posts.Where(x=>x.Status == true);
             return model.OrderByDescending(x => x.PostedDate).ToPagedList(page, pageSize);
         }
         public Post GetArticleByID(long id)
@@ -234,8 +234,8 @@ namespace Model.DAO
             try
             {
                 var post = db.Posts
-                    .Include(x=>x.PostTags)
-                    .Include(x=>x.Pictures)
+                    .Include(x => x.PostTags)
+                    .Include(x => x.Pictures)
                     .Include(x => x.Videos)
                     .SingleOrDefault(x => x.PostID == id);
 

@@ -23,8 +23,10 @@ namespace Model.DAO
         }
         public List<User> ListUser()
         {
+            db.Configuration.ProxyCreationEnabled = false;
             return db.Users.ToList();
         }
+        
         public int UserCounter()
         {
             return db.Users.Count();

@@ -40,14 +40,17 @@ namespace itforum_teamwork
                      "~/Content/Admin/plugins/ckeditor/ckeditor.js",
                      "~/Content/Admin/bower_components/metisMenu/dist/metisMenu.min.js",
                      "~/Content/Admin/dist/js/sb-admin-2.js",
-                     "~/Content/Client/js/alertstyle.js",
-                      "~/Scripts/DataTables/jquery.dataTables.min.js"));
+                     "~/Content/Client/js/alertstyle.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jsadminController").Include(
                      "~/Content/Admin/js/jsControllers/userController.js"));
-            bundles.Add(new ScriptBundle("~/bundles/jsHubCounter").Include(
-                     "~/Scripts/jquery.signalR-2.2.0.min.js",
-                     "~/signalr/hubs"));
+
+            //bundles.Add(new ScriptBundle("~/bundles/jsHubCounter").Include(
+            //         "~/Scripts/jquery.signalR-2.2.0.min.js",
+            //         "~/signalr/hubs"));
+
+            bundles.Add(new ScriptBundle("~/bundles/jsdataTable").Include(
+                     "~/Scripts/DataTables/jquery.dataTables.min.js"));
 
             //css admin
             bundles.Add(new StyleBundle("~/bundles/cssadmin").Include(
@@ -56,13 +59,10 @@ namespace itforum_teamwork
                        "~/Content/Admin/bower_components/bootstrap/dist/css/icon-bootstrap.css",
                       "~/Content/Admin/bower_components/metisMenu/dist/metisMenu.min.css",
                       "~/Content/Admin/dist/css/sb-admin-2.css",
-                      "~/Content/DataTables/css/dataTables.bootstrap.min.css",
                       "~/Content/Admin/bower_components/font-awesome/css/font-awesome.min.css"));
 
-            bundles.Add(new StyleBundle("~/bundles/tablecss").Include(
-                      "~/Content/DataTables/css/dataTables.bootstrap.min.css"));
-
-
+            bundles.Add(new StyleBundle("~/bundles/cssdataTable").Include(
+                      "~/Content/DataTables/css/jquery.dataTables.min.css"));
 
             BundleTable.EnableOptimizations = false;
         }

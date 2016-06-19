@@ -2887,6 +2887,7 @@
     <Content Include="Content\Client\plugins\ckfinder\_samples\skin_v1.html" />
     <Content Include="Content\Client\plugins\ckfinder\_samples\standalone.html" />
     <Content Include="Content\Client\plugins\ckfinder\_samples\standalone_v1.html" />
+    <Content Include="Content\DataTables\ajax.txt" />
     <Content Include="Content\DataTables\css\autoFill.bootstrap.css" />
     <Content Include="Content\DataTables\css\autoFill.bootstrap.min.css" />
     <Content Include="Content\DataTables\css\autoFill.dataTables.css" />

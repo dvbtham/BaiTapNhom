@@ -33,7 +33,7 @@
             <ul>
                 <li><i class="fa fa-user"></i><a href="@linkByUser">@userModel.Name</a></li>
                 <li><i class="fa fa-th-list"></i><a href="@linkByCategory">@catModel.CategoryName</a></li>
-                <li><i class="fa fa-calendar"></i>@Model.PostedDate</li>
+                <li title="@Common.TimeHelper.TimeAgo(Convert.ToDateTime(Model.PostedDate))"><i class="fa fa-calendar"></i> @String.Format("{0:dd/MM/yyyy}", Model.PostedDate);</li>
                 <li><i class="fa fa-eye"></i>@Model.Views</li>
             </ul>
         </div>

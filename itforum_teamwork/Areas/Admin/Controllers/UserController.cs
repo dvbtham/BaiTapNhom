@@ -9,6 +9,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MvcPaging;
+using Newtonsoft.Json;
 
 namespace itforum_teamwork.Areas.Admin.Controllers
 {
@@ -34,6 +35,7 @@ namespace itforum_teamwork.Areas.Admin.Controllers
             else
                 return View(users);
         }
+        //[HttpGet]
         //public ActionResult Index()
         //{
         //    return View();
@@ -41,13 +43,11 @@ namespace itforum_teamwork.Areas.Admin.Controllers
         //[HttpGet]
         //public JsonResult getUsers()
         //{
-        //    var jsonData = new
-        //    {
-        //        data = new UserDAO().ListUser()
-        //    };
-        //    return Json(jsonData, JsonRequestBehavior.AllowGet);
+        //    List<User> jsonData = new UserDAO().ListUser();
+        
+        //    return Json(new { data = jsonData }, JsonRequestBehavior.AllowGet);
 
-        //} 
+        //}
         [HttpGet]
         public ActionResult Signup()
         {
@@ -157,7 +157,7 @@ namespace itforum_teamwork.Areas.Admin.Controllers
         {
             new UserDAO().Delete(id);
             SetAlert("Xóa tài khoản thành công", "success");
-            return RedirectToAction("Index","User");
+            return RedirectToAction("Index", "User");
         }
     }
 }

@@ -49,6 +49,7 @@
 
         [Display(Name = "Ngày đăng")]
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? PostedDate { get; set; }
 
         [Display(Name = "Lượt xem")]

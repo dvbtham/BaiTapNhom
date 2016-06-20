@@ -8,7 +8,7 @@
 @import url(https://fonts.googleapis.com/css?family=Arima+Madurai);
 
 body {
-    font-family: 'Arima Madurai', cursive;
+    font-family: 'Arima Madurai', cursive,Arial, Helvetica, sans-serif;
     position: relative;
     font-weight: 400;
 }

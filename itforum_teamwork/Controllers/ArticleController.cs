@@ -42,6 +42,7 @@ namespace itforum_teamwork.Controllers
 
         public ActionResult PostByUser(long id, int? page )
         {
+            CommonConstants.IsAjax = true;
             IList<Post> posts = new ArticleDAO().GetPostsByUserID(id);
             int currentPageIndex = page.HasValue ? page.Value : 1;
             posts = posts.ToPagedList(currentPageIndex, defaultPageSize);
@@ -55,6 +56,7 @@ namespace itforum_teamwork.Controllers
 
         public ActionResult PostByCatID(long id, int? page)
         {
+            CommonConstants.IsAjax = true;
             IList<Post> posts = new ArticleDAO().GetPostsByCatID(id);
             int currentPageIndex = page.HasValue ? page.Value : 1;
             posts = posts.ToPagedList(currentPageIndex, defaultPageSize);

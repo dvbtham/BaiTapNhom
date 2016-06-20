@@ -31,6 +31,17 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PublishDatabaseSettings>
+      <Objects>
+        <ObjectGroup Name="itforumEntities-Deployment" Order="1">
+          <Destination Path="" />
+          <Object Type="DbFullSql">
+            <PreSource Path="Data Source=.%3bInitial Catalog=itForum_2142016%3bPersist Security Info=True%3bUser ID=sa%3bPassword=123%3bApplication Name=EntityFramework" ScriptSchema="True" ScriptData="False" CopyAllFullTextCatalogs="False" DriDefaults="True" />
+            <Source Path="obj\Debug\AutoScripts\itforumEntities-Deployment_SchemaOnly.sql" Transacted="True" />
+          </Object>
+        </ObjectGroup>
+      </Objects>
+    </PublishDatabaseSettings>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -39,13 +50,13 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <FilesToIncludeForPublish>AllFilesInTheProject</FilesToIncludeForPublish>
+    <FilesToIncludeForPublish>AllFilesInProjectFolder</FilesToIncludeForPublish>
     <PublishDatabaseSettings>
       <Objects>
         <ObjectGroup Name="itforumEntities-Deployment" Order="1">
-          <Destination Path="workstation id=codtodatabase.mssql.somee.com%3bpacket size=4096%3buser id=codto_login%3bpwd=thambn811996%3bdata source=codtodatabase.mssql.somee.com%3bpersist security info=False%3binitial catalog=codtodatabase" />
+          <Destination Path="workstation id=itforum.mssql.somee.com%3bpacket size=4096%3buser id=itforum_SQLLogin_1%3bpwd=mvzql892vn%3bdata source=itforum.mssql.somee.com%3bpersist security info=False%3binitial catalog=itforum" />
           <Object Type="DbFullSql">
-            <PreSource Path="Data Source=.%3bInitial Catalog=itForum_2142016%3bPersist Security Info=True%3bUser ID=sa%3bPassword=123%3bApplication Name=EntityFramework" ScriptSchema="True" ScriptData="False" CopyAllFullTextCatalogs="False" DriDefaults="True" />
+            <PreSource Path="data source=.%3binitial catalog=itForum_2142016%3bpersist security info=True%3buser id=sa%3bpassword=123%3bmultipleactiveresultsets=True%3bapplication name=EntityFramework" ScriptSchema="True" ScriptData="False" CopyAllFullTextCatalogs="False" DriDefaults="True" />
             <Source Path="obj\Release\AutoScripts\itforumEntities-Deployment_SchemaOnly.sql" Transacted="True" />
           </Object>
         </ObjectGroup>

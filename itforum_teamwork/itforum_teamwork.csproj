@@ -3601,6 +3601,8 @@
     <Content Include="Views\Contact\_ContactPartial.cshtml" />
     <Content Include="Views\Contact\TopContactInfo.cshtml" />
     <Content Include="Views\Home\_AjaxPostList.cshtml" />
+    <Content Include="Views\Article\_AjaxPostList.cshtml" />
+    <Content Include="Views\Article\PostByCatID.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

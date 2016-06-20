@@ -28,31 +28,39 @@ namespace Model.DAO
         {
             return db.Posts.Where(x => x.Status == true).ToList();
         }
-        public IEnumerable<Post> GetListOfArticlePagging(string searchString, int page, int pageSize)
+        public List<Post> GetPostsByUserID(long id)
         {
-            IQueryable<Post> model = db.Posts;
-            if (!string.IsNullOrEmpty(searchString))
-            {
-                model = model.Where(x => x.Title.Contains(searchString) || x.Content.Contains(searchString) || x.Detail.Contains(searchString) && x.Status == true);
-            }
-            return model.OrderByDescending(x => x.PostedDate).ToPagedList(page, pageSize);
+            return db.Posts.Where(x => x.UserID == id).ToList();
         }
-        public IEnumerable<Post> GetArticlePaggingByUser(string searchString, long? id, int page, int pageSize)
+        public List<Post> GetPostsByCatID(long id)
         {
-            IQueryable<Post> model = db.Posts.Where(x => x.UserID == id && x.Status == true);
-            if (!string.IsNullOrEmpty(searchString))
-            {
-                model = model.Where(x => x.Title.Contains(searchString) || x.Content.Contains(searchString) || x.Detail.Contains(searchString) && x.Status == true);
-            }
-            return model.OrderByDescending(x => x.PostedDate).ToPagedList(page, pageSize);
+            return db.Posts.Where(x => x.CategoryID == id).ToList();
         }
-        public IEnumerable<Post> GetListByCatID(long id, int page, int pageSize)
-        {
-            IQueryable<Post> model = db.Posts;
-            model = model.Where(x => x.CategoryID == id && x.Status == true);
+        //public IEnumerable<Post> GetListOfArticlePagging(string searchString, int page, int pageSize)
+        //{
+        //    IQueryable<Post> model = db.Posts;
+        //    if (!string.IsNullOrEmpty(searchString))
+        //    {
+        //        model = model.Where(x => x.Title.Contains(searchString) || x.Content.Contains(searchString) || x.Detail.Contains(searchString) && x.Status == true);
+        //    }
+        //    return model.OrderByDescending(x => x.PostedDate).ToPagedList(page, pageSize);
+        //}
+        //public IEnumerable<Post> GetArticlePaggingByUser(string searchString, long? id, int page, int pageSize)
+        //{
+        //    IQueryable<Post> model = db.Posts.Where(x => x.UserID == id && x.Status == true);
+        //    if (!string.IsNullOrEmpty(searchString))
+        //    {
+        //        model = model.Where(x => x.Title.Contains(searchString) || x.Content.Contains(searchString) || x.Detail.Contains(searchString) && x.Status == true);
+        //    }
+        //    return model.OrderByDescending(x => x.PostedDate).ToPagedList(page, pageSize);
+        //}
+        //public IEnumerable<Post> GetListByCatID(long id, int page, int pageSize)
+        //{
+        //    IQueryable<Post> model = db.Posts;
+        //    model = model.Where(x => x.CategoryID == id && x.Status == true);
 
-            return model.OrderByDescending(x => x.PostedDate).ToPagedList(page, pageSize);
-        }
+        //    return model.OrderByDescending(x => x.PostedDate).ToPagedList(page, pageSize);
+        //}
         //Danh sách 10 bài viết nổi bật
         public List<Post> GetArticleTop10()
         {

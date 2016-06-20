@@ -7,33 +7,61 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Common;
+using MvcPaging;
 
 namespace itforum_teamwork.Controllers
 {
     public class ArticleController : Controller
     {
-        public ActionResult Index(long id, int page = 1, int pageSize = 10)
+        private const int defaultPageSize = 10;
+        public ActionResult Index(string searchString, int? page)
         {
-            var model = new ArticleDAO().GetListByCatID(id, page, pageSize);
-            if (model == null)
-                return RedirectToAction("Index", "Error");
-            return View(model);
+            ViewBag.SearchString = searchString;
+
+            IList<Post> posts = new ArticleDAO().GetPosts();
+
+            int currentPageIndex = page.HasValue ? page.Value : 1;
+            if (string.IsNullOrWhiteSpace(searchString))
+            {
+                posts = posts.ToPagedList(currentPageIndex, defaultPageSize);
+                ViewBag.foundNumbers = posts.Count;
+            }
+            else
+            {
+                posts = posts.Where(x => x.Title.ToLower().Contains(searchString.ToLower()) || x.Content.Contains(searchString)).ToPagedList(currentPageIndex, defaultPageSize);
+            }
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("_AjaxPostList", posts);
+            }
+            else
+                return View(posts);
         }
 
-        public ActionResult Home(int page = 1, int pageSize = 10)
+        public ActionResult PostByUser(long id, int? page )
         {
-            var model = new ArticleDAO().GetListPaging(page, pageSize);
-            if (model == null)
-                return RedirectToAction("Index", "Error");
-            return View(model);
+            IList<Post> posts = new ArticleDAO().GetPostsByUserID(id);
+            int currentPageIndex = page.HasValue ? page.Value : 1;
+            posts = posts.ToPagedList(currentPageIndex, defaultPageSize);
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("_AjaxPostList", posts);
+            }
+            else
+                return View(posts);
         }
 
-        public ActionResult PostByUser(long id, int page = 1, int pageSize = 10)
+        public ActionResult PostByCatID(long id, int? page)
         {
-            var model = new ArticleDAO().GetListByUserID(id, page, pageSize);
-            if (model == null)
-                return RedirectToAction("Index", "Error");
-            return View(model);
+            IList<Post> posts = new ArticleDAO().GetPostsByCatID(id);
+            int currentPageIndex = page.HasValue ? page.Value : 1;
+            posts = posts.ToPagedList(currentPageIndex, defaultPageSize);
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("_AjaxPostList", posts);
+            }
+            else
+                return View(posts);
         }
 
         public ActionResult Details(long id)

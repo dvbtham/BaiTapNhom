@@ -1,71 +1,40 @@
-﻿@model PagedList.IPagedList<Model.EF.Post>
-@using Model.DAO;
-@using PagedList.Mvc;
-@using itforum_teamwork.Common
+﻿@using MvcPaging
+@model IPagedList<Model.EF.Post>
 
 @{
+    ViewBag.Title = "Trang chủ";
+    ViewBag.Home = "active";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var userDAO = new UserDAO();
-    var catDAO = new CategoryDAO();
 }
 
 <!--features_items-->
 
-<h2 class="title text-center">dòng bài viết</h2>
-
-@if (Model.Count > 0)
+<h2 class="title text-center">Dòng bài viết</h2>
+@using (Ajax.BeginForm("Index", "Article",
+                            new AjaxOptions { UpdateTargetId = "grid-list", HttpMethod = "get", LoadingElementId = "loading", OnBegin = "beginPaging", OnSuccess = "successPaging", OnFailure = "failurePaging" },
+                            new { id = "frm-search" }))
 {
-    foreach (var item in Model)
-    {
-        var userModel = userDAO.GetUserByID(item.UserID);
-        var catModel = catDAO.GetCategoryByID(item.CategoryID);
+    <hr />
+    <div id="grid-list">
+        @{ Html.RenderPartial("_AjaxPostList", Model); }
+    </div>
+}
+<br />
+<script type="text/javascript">
 
-        var linkByUser = "/bai-viet/tac-gia/" + ConvertToUnsign.ConvertToUnSign(userModel.Name).ToLower() + "-" + item.UserID;
-        var linkByCategory = "/bai-viet/danh-muc/" + ConvertToUnsign.ConvertToUnSign(catModel.CategoryName).ToLower() + "-" + item.CategoryID;
-        var linkRead = "/bai-viet/chi-tiet/" + ConvertToUnsign.ConvertToUnSign(item.Title).ToLower() + "-" + item.PostID;
-        ViewBag.Title = "Danh mục " + catModel.CategoryName;
-        <div class="col-sm-12">
-            <div class="col-sm-4 post_info">
-                <div class="pic_box">
-                    <img class="img-responsive" src="@Url.Content(""+item.ImageShowOnHome)" width="270" height="270" alt="@item.Title" />
-                </div>
-                <div class="overlay">
-                    <ul class="info">
-                        <li>
-                            <i class="fa fa-user" aria-hidden="true"></i>
-                            <span><a href="@linkByUser">@userModel.Name</a></span>
-                        </li>
-                        <li>
-                            <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
-                            <span><a href="@linkByCategory">@catModel.CategoryName</a></span>
-                        </li>
-                        <li>
-                            <i class="fa fa-calendar" aria-hidden="true"></i>
-                            <span title="@item.PostedDate">@Common.TimeHelper.TimeAgo(Convert.ToDateTime(item.PostedDate))</span>
-                        </li>
-                        <li>
-                            <i class="fa fa-eye" aria-hidden="true"></i>
-                            <span>@item.Views</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-sm-7 col-sm-offset-1">
-                <a href="@linkRead" id="viewPost"><h4>@item.Title</h4></a>
-                <hr />
-                <p>@Html.Raw(item.Content)</p>
-                <button class="btn btn-primary">
-                    <a href="@linkRead"> Xem thêm </a><span class="glyphicon glyphicon-chevron-right"></span>
-                </button>
-            </div>
-        </div>
-    <div class="clear"><hr /></div>
+    function beginPaging(args) {
+        // Animate
+        $('#grid-list').fadeOut('normal');
     }
-}
-else
-{
-    <h4 class="text-center text-danger">Không có dữ liệu</h4>
-}
-@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
 
+    function successPaging() {
+        // Animate
+        $('#grid-list').fadeIn('normal');
+        $('a').tooltip();
+    }
 
+    function failurePaging() {
+        alert("Danh sách không có dữ liệu.");
+    }
+
+</script>

@@ -24,7 +24,7 @@ namespace itforum_teamwork
             routes.MapRoute(
                     "Tat Ca Bai Viet",
                     "bai-viet",
-                    new { controller = "Article", action = "Home", id = UrlParameter.Optional },
+                    new { controller = "Article", action = "Index", id = UrlParameter.Optional },
                     new[] { "itforum_teamwork.Controllers" }
                 );
 
@@ -45,7 +45,7 @@ namespace itforum_teamwork
             routes.MapRoute(
                     "Bai Viet Theo Danh Muc",
                     "bai-viet/danh-muc/{metatile}-{id}",
-                    new { controller = "Article", action = "Index", id = UrlParameter.Optional },
+                    new { controller = "Article", action = "PostByCatID", id = UrlParameter.Optional },
                     new[] { "itforum_teamwork.Controllers" }
                 );
 

@@ -6,17 +6,35 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MvcPaging;
 
 namespace itforum_teamwork.Controllers
 {
     public class PostController : BaseController
     {
-        public ActionResult Index(string searchString, int page = 1, int pageSize = 10)
+        private const int defaultPageSize = 10;
+        public ActionResult Index(string searchString, int? page)
         {
-            var session = (UserLogin)Session[itforum_teamwork.Common.CommonConstants.CLIENT_USER_SESSION];
-            var post = new ArticleDAO().GetArticlePaggingByUser(searchString, session.UserID, page, pageSize);
             ViewBag.SearchString = searchString;
-            return View(post);
+
+            IList<Post> posts = new ArticleDAO().GetPosts();
+
+            int currentPageIndex = page.HasValue ? page.Value : 1;
+            if (string.IsNullOrWhiteSpace(searchString))
+            {
+                posts = posts.ToPagedList(currentPageIndex, defaultPageSize);
+                ViewBag.foundNumbers = posts.Count;
+            }
+            else
+            {
+                posts = posts.Where(x => x.Title.ToLower().Contains(searchString.ToLower()) || x.Content.Contains(searchString)).ToPagedList(currentPageIndex, defaultPageSize);
+            }
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("_AjaxPostList", posts);
+            }
+            else
+                return View(posts);
         }
         [HttpGet]
         public ActionResult Create()
@@ -48,9 +66,8 @@ namespace itforum_teamwork.Controllers
                 var result = dao.Insert(post);
                 if (result > 0)
                 {
-                    var model = new ArticleDAO().GetArticlePaggingByUser("", session.UserID, 1, 10);
                     SetAlert("Đăng bài viết thành công", "success");
-                    return View("Index", model);
+                    return RedirectToAction("Index", "Article");
                 }
                 else
                     ModelState.AddModelError("", "Đăng bài viết không thành công");
@@ -88,8 +105,7 @@ namespace itforum_teamwork.Controllers
                 {
                     SetAlert("Cập nhật bài viết thành công", "success");
                     var session = (UserLogin)Session[itforum_teamwork.Common.CommonConstants.CLIENT_USER_SESSION];
-                    var model = new ArticleDAO().GetArticlePaggingByUser("", session.UserID, 1, 10);
-                    return View("Index", model);
+                    return RedirectToAction("Index", "Article");
                 }
             }
             else

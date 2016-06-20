@@ -1,0 +1,99 @@
+﻿@using MvcPaging
+@model IPagedList<Model.EF.Post>
+@using itforum_teamwork.Common
+@{
+    var userDAO = new Model.DAO.UserDAO();
+    var catDAO = new Model.DAO.CategoryDAO();
+}
+
+
+@if (Model.Count > 0)
+{
+    if (!string.IsNullOrEmpty(ViewBag.searchString))
+    {
+        <h5 class="form-inline">Tìm thấy <span class="badge">@ViewBag.foundNumbers</span> kết quả cho từ khóa <strong class="italic">"@ViewBag.searchString"</strong>.</h5>
+        <br />
+    }
+    foreach (var item in Model)
+    {
+
+        var userModel = userDAO.GetUserByID(item.UserID);
+        var catModel = catDAO.GetCategoryByID(item.CategoryID);
+
+        var linkByUser = "/bai-viet/tac-gia/" + ConvertToUnsign.ConvertToUnSign(userModel.Name).ToLower() + "-" + item.UserID;
+        var linkByCategory = "/bai-viet/danh-muc/" + ConvertToUnsign.ConvertToUnSign(catModel.CategoryName).ToLower() + "-" + item.CategoryID;
+        var linkRead = "/bai-viet/chi-tiet/" + ConvertToUnsign.ConvertToUnSign(item.Title).ToLower() + "-" + item.PostID;
+
+        <div class="col-sm-12">
+            <div class="col-sm-4 post_info">
+                <div class="pic_box">
+                    <img src="@Url.Content(""+item.ImageShowOnHome)" width="270" height="280" alt="@item.Title" />
+                </div>
+                <div class="overlay">
+                    <ul class="info">
+                        <li>
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                            <span><a href="@linkByUser">@userModel.Name</a></span>
+                        </li>
+                        <li>
+                            <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
+                            <span><a href="@linkByCategory">@catModel.CategoryName</a></span>
+                        </li>
+                        <li>
+                            <i class="fa fa-calendar" aria-hidden="true"></i>
+                            <span title="@String.Format("{0:dd/MM/yyyy}",item.PostedDate)">@Common.TimeHelper.TimeAgo(Convert.ToDateTime(item.PostedDate))</span>
+                        </li>
+                        <li>
+                            <i class="fa fa-eye" aria-hidden="true"></i>
+                            <span>@item.Views</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm-7 col-sm-offset-1">
+                <a href="@linkRead" id="viewPost" data-id="@item.PostID"><h4>@item.Title</h4></a>
+                <hr />
+                <p>@Html.Raw(item.Content)</p>
+                <button class="btn btn-primary">
+                    <a href="@linkRead"> Xem thêm </a><span class="glyphicon glyphicon-chevron-right"></span>
+                </button>
+            </div>
+        </div>
+        <div class="clear"><hr /></div>
+
+    }
+    <div class="pager">
+        @Html.Raw(Ajax.Pager(
+            new Options
+            {
+                PageSize = Model.PageSize,
+                TotalItemCount = Model.TotalItemCount,
+                CurrentPage = Model.PageNumber,
+                ItemTexts = new ItemTexts() { First = "Trang đầu", Previous = "Trang sau", Next = "Trang kế tiếp", Last = "Trang cuối" },
+                ItemIcon = new ItemIcon() { First = "icon-backward", Previous = "icon-chevron-left", Next = "icon-chevron-right", Last = "icon-forward" },
+                TooltipTitles = new TooltipTitles() { Next = "Trang kế tiếp", Previous = "Trang sau", Page = "Trang {0}.", First = "Về trang đầu", Last = "Đi tới trang cuối" },
+                Size = Size.mini,
+                Alignment = Alignment.centered,
+                IsShowControls = true,
+                IsShowFirstLast = true,
+                CssClass = ""
+            },
+            new AjaxOptions
+            {
+                UpdateTargetId = "grid-list",
+                OnBegin = "beginPaging",
+                OnSuccess = "successPaging",
+                OnFailure = "failurePaging"
+            }, new { controller = "Home", action = "Index", searchString = ViewBag.SearchString }))
+
+    </div>
+}
+else
+{
+    if (!string.IsNullOrEmpty(ViewBag.searchString))
+    {
+        <h5 class="form-inline">Không có kết quả nào cho từ khóa <strong class="italic">"@ViewBag.searchString"</strong>.</h5>
+        <br />
+    }
+}
+

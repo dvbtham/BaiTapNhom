@@ -108,7 +108,7 @@
                     </div>
                 </div>
 
-                <div class="col-sm-9 padding-right">
+                <div class="col-sm-9 padding-right" id="searchResult">
                     @RenderBody()
                 </div>
             </div>
@@ -163,6 +163,7 @@
     <script src="~/Scripts/jquery.signalR-2.2.0.min.js"></script>
     <script src="~/signalr/hubs"></script>
     <script src="~/Content/Admin/js/jsCounterHub/jsHitCounter.js"></script>
+    <script src="~/Content/Client/js/searchScroll.js"></script>
 
     @RenderSection("jsFooter", required: false)
     

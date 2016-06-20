@@ -1853,6 +1853,7 @@
     <Content Include="Content\Client\js\jquery.scrollUp.min.js" />
     <Content Include="Content\Client\js\main.js" />
     <Content Include="Content\Client\js\price-range.js" />
+    <Content Include="Content\Client\js\searchScroll.js" />
     <Content Include="Content\Client\plugins\ckeditor\adapters\jquery.js" />
     <Content Include="Content\Client\plugins\ckeditor\build-config.js" />
     <Content Include="Content\Client\plugins\ckeditor\ckeditor.js" />
@@ -3599,6 +3600,7 @@
     <Content Include="Views\Assets\AssetByAssType.cshtml" />
     <Content Include="Views\Contact\_ContactPartial.cshtml" />
     <Content Include="Views\Contact\TopContactInfo.cshtml" />
+    <Content Include="Views\Home\_AjaxPostList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

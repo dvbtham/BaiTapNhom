@@ -23,6 +23,11 @@ namespace Model.DAO
             post.Views += 1;
             return post.Views;
         }
+
+        public List<Post> GetPosts()
+        {
+            return db.Posts.Where(x => x.Status == true).ToList();
+        }
         public IEnumerable<Post> GetListOfArticlePagging(string searchString, int page, int pageSize)
         {
             IQueryable<Post> model = db.Posts;

@@ -3608,7 +3608,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Views\Base\" />
-    <Folder Include="Views\AlertMessage\" />
     <Folder Include="Views\Base\" />
     <Folder Include="Views\SocNet\" />
     <Folder Include="Views\User\" />

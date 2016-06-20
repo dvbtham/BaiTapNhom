@@ -25,9 +25,15 @@
             </div>
         </div>
         <div class="col-sm-3">
-            @using (Ajax.BeginForm("Index", "Home",
+            @*@using (Ajax.BeginForm("Index", "Home",
                             new AjaxOptions { UpdateTargetId = "grid-list", HttpMethod = "get", LoadingElementId = "loading", OnBegin = "beginPaging", OnSuccess = "successPaging", OnFailure = "failurePaging" },
                             new { id = "frm-search" }))
+            {
+                <div class="search_box pull-right">
+                    <input type="text" value="@ViewBag.SearchString" name="searchString" id="txtSearch" placeholder="Tìm kiếm bài viết..." />
+                </div>
+            }*@
+            @using (Html.BeginForm("Index", "Home", FormMethod.Get))
             {
                 <div class="search_box pull-right">
                     <input type="text" value="@ViewBag.SearchString" name="searchString" id="txtSearch" placeholder="Tìm kiếm bài viết..." />

@@ -1,0 +1,106 @@
+﻿@using MvcPaging
+@using Model.DAO
+@model IPagedList<Model.EF.Post>
+
+@{
+    var userDao = new UserDAO();
+    var catDao = new CategoryDAO();
+}
+<div class="table-responsive table-bordered">
+    <table class="table" cellpadding="10">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Title)
+            <th>
+                @Html.DisplayNameFor(model => model.First().UserID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().CategoryID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().PostedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Views)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            var user = userDao.GetUserByID(item.UserID);
+            var cat = catDao.GetCategoryByID(item.CategoryID);
+            <tr id="row_@item.PostID">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @user.Name
+                </td>
+                <td>
+                    @cat.CategoryName
+                </td>
+                <td>
+                    @if (item.Status == true)
+                    {
+                        <p>Đã duyệt</p>
+                    }
+                    else
+                    {
+                        <p>Chưa duyệt</p>
+                    }
+                </td>
+                <td>
+                    @Convert.ToDateTime(item.PostedDate).ToShortDateString()
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Views)
+                </td>
+                <td>
+                    <a href="/Post/Update/@item.PostID"><i class="fa fa-edit" title="Chỉnh sửa"></i></a>
+                    |
+                    @Ajax.ActionLink("Xóa", "Delete", new { id = item.PostID }, new AjaxOptions
+                               {
+                                   Confirm = "Bạn thật sự muốn bài viết này xóa?",
+                                   OnComplete = "$('#row_" + @item.PostID + "').remove()",
+                                   HttpMethod = "Delete"
+                               })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+<div class="well">
+    Hiển thị <span class="badge badge-success">@Model.ItemStart</span> tới <span class="badge badge-info">@Model.ItemEnd</span>
+    của <span class="badge badge-info">@Model.TotalItemCount</span> kết quả
+</div>
+<div class="pager">
+    @Html.Raw(Ajax.Pager(
+            new Options
+            {
+                PageSize = Model.PageSize,
+                TotalItemCount = Model.TotalItemCount,
+                CurrentPage = Model.PageNumber,
+                ItemTexts = new ItemTexts() { First = "Trang đầu", Previous = "Trang sau", Next = "Trang kế tiếp", Last = "Trang cuối" },
+                ItemIcon = new ItemIcon() { First = "icon-backward", Previous = "icon-chevron-left", Next = "icon-chevron-right", Last = "icon-forward" },
+                TooltipTitles = new TooltipTitles() { Next = "Trang kế tiếp", Previous = "Trang sau", Page = "Trang {0}.", First = "Về trang đầu", Last = "Đi tới trang cuối" },
+                Size = Size.normal,
+                Alignment = Alignment.centered,
+                IsShowControls = true,
+                IsShowFirstLast = true,
+                CssClass = ""
+            },
+            new AjaxOptions
+            {
+                UpdateTargetId = "grid-list",
+                OnBegin = "beginPaging",
+                OnSuccess = "successPaging",
+                OnFailure = "failurePaging"
+            }, new { controller = "Post", action = "Index", searchString = ViewBag.SearchString }))
+
+</div>
+<script src="../../Scripts/bootstrap.min.js" type="text/javascript"></script>

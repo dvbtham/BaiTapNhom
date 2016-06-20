@@ -16,23 +16,18 @@ namespace itforum_teamwork.Controllers
         public ActionResult Index(string searchString, int? page)
         {
             ViewBag.SearchString = searchString;
-
-            IList<Post> posts = new ArticleDAO().GetPosts();
-
+            IList<Post> posts = new ArticleDAO().ListPostAll();
             int currentPageIndex = page.HasValue ? page.Value : 1;
             if (string.IsNullOrWhiteSpace(searchString))
             {
                 posts = posts.ToPagedList(currentPageIndex, defaultPageSize);
-                ViewBag.foundNumbers = posts.Count;
             }
             else
             {
-                posts = posts.Where(x => x.Title.ToLower().Contains(searchString.ToLower()) || x.Content.Contains(searchString)).ToPagedList(currentPageIndex, defaultPageSize);
+                posts = posts.Where(x => x.Title.ToLower().Contains(searchString)).ToPagedList(currentPageIndex, defaultPageSize);
             }
             if (Request.IsAjaxRequest())
-            {
                 return PartialView("_AjaxPostList", posts);
-            }
             else
                 return View(posts);
         }
@@ -67,7 +62,7 @@ namespace itforum_teamwork.Controllers
                 if (result > 0)
                 {
                     SetAlert("Đăng bài viết thành công", "success");
-                    return RedirectToAction("Index", "Article");
+                    return RedirectToAction("Index", "Post");
                 }
                 else
                     ModelState.AddModelError("", "Đăng bài viết không thành công");
@@ -105,7 +100,7 @@ namespace itforum_teamwork.Controllers
                 {
                     SetAlert("Cập nhật bài viết thành công", "success");
                     var session = (UserLogin)Session[itforum_teamwork.Common.CommonConstants.CLIENT_USER_SESSION];
-                    return RedirectToAction("Index", "Article");
+                    return RedirectToAction("Index", "Post");
                 }
             }
             else

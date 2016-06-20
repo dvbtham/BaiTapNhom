@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Common;
 using MvcPaging;
+using itforum_teamwork.Common;
 
 namespace itforum_teamwork.Controllers
 {
@@ -16,6 +17,7 @@ namespace itforum_teamwork.Controllers
         private const int defaultPageSize = 10;
         public ActionResult Index(string searchString, int? page)
         {
+            CommonConstants.IsAjax = true;
             ViewBag.SearchString = searchString;
 
             IList<Post> posts = new ArticleDAO().GetPosts();
@@ -66,6 +68,7 @@ namespace itforum_teamwork.Controllers
 
         public ActionResult Details(long id)
         {
+            CommonConstants.IsAjax = false;
             var viewModel = new ArticleDAO().GetArticleByID(id);
             ViewBag.Tags = new ArticleDAO().ListTag(id);
             if (viewModel == null)

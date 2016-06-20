@@ -11,15 +11,17 @@ using MvcPaging;
 
 namespace itforum_teamwork.Controllers
 {
+
     public class HomeController : Controller
     {
         private const int defaultPageSize = 10;
         public ActionResult Index(string searchString, int? page)
         {
+            CommonConstants.IsAjax = true;
             ViewBag.SearchString = searchString;
-            
+
             IList<Post> posts = new ArticleDAO().GetPosts();
-            
+
             int currentPageIndex = page.HasValue ? page.Value : 1;
             if (string.IsNullOrWhiteSpace(searchString))
             {
@@ -43,6 +45,6 @@ namespace itforum_teamwork.Controllers
             ViewBag.Slides = new ArticleDAO().GetHotArticle();
             return PartialView();
         }
-        
+
     }
 }

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MvcPaging;
+using itforum_teamwork.Common;
 
 namespace itforum_teamwork.Controllers
 {
@@ -14,6 +15,7 @@ namespace itforum_teamwork.Controllers
         private const int defaultPageSize = 10;
         public ActionResult Index(string searchString, int? page)
         {
+            CommonConstants.IsAjax = false;
             ViewBag.SearchString = searchString;
             IList<Asset> assets = new AssetsDAO().ListAll();
             int currentPageIndex = page.HasValue ? page.Value : 1;
@@ -33,6 +35,7 @@ namespace itforum_teamwork.Controllers
 
         public ActionResult Details(int id)
         {
+            CommonConstants.IsAjax = false;
             var modelFirst = new AssetsDAO().ViewDetail(id);
             if (modelFirst == null)
                 return RedirectToAction("Index", "Error");
@@ -41,6 +44,7 @@ namespace itforum_teamwork.Controllers
        
         public ActionResult AssetByUser(int? page, long id)
         {
+            CommonConstants.IsAjax = false;
             IList<Asset> assets = new AssetsDAO().ByUserID(id);
             int currentPageIndex = page.HasValue ? page.Value : 1;
             assets = assets.ToPagedList(currentPageIndex, defaultPageSize);
@@ -51,6 +55,7 @@ namespace itforum_teamwork.Controllers
         }
         public ActionResult AssetByAssType(int? page, int id)
         {
+            CommonConstants.IsAjax = false;
             IList<Asset> assets = new AssetsDAO().ByAssetTypeID(id);
             int currentPageIndex = page.HasValue ? page.Value : 1;
             assets = assets.ToPagedList(currentPageIndex, defaultPageSize);

@@ -10,6 +10,7 @@ using Model.EF;
 using itforum_teamwork.Models;
 using System.Threading.Tasks;
 using System.Net;
+using itforum_teamwork.Common;
 
 namespace itforum_teamwork.Controllers
 {
@@ -17,6 +18,7 @@ namespace itforum_teamwork.Controllers
     {
         public ActionResult Index()
         {
+            CommonConstants.IsAjax = false;
             return View();
         }
         [HttpPost]

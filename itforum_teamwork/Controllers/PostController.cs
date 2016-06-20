@@ -16,7 +16,8 @@ namespace itforum_teamwork.Controllers
         public ActionResult Index(string searchString, int? page)
         {
             ViewBag.SearchString = searchString;
-            IList<Post> posts = new ArticleDAO().ListPostAll();
+            var session = (UserLogin)Session[itforum_teamwork.Common.CommonConstants.CLIENT_USER_SESSION];
+            IList<Post> posts = new ArticleDAO().GetPostsByUserID(session.UserID);
             int currentPageIndex = page.HasValue ? page.Value : 1;
             if (string.IsNullOrWhiteSpace(searchString))
             {

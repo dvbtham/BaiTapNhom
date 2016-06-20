@@ -30,7 +30,7 @@ namespace Model.DAO
         }
         public List<Post> GetPostsByUserID(long id)
         {
-            return db.Posts.Where(x => x.UserID == id).ToList();
+            return db.Posts.Where(x => x.UserID == id).OrderByDescending(x => x.PostedDate).ToList();
         }
         public List<Post> GetPostsByCatID(long id)
         {
@@ -141,18 +141,14 @@ namespace Model.DAO
             return db.Posts.Where(x => x.Status == true).OrderByDescending(x => x.Views).Take(5).ToList();
         }
 
-
-        public IEnumerable<Post> GetListByUserID(long id, int page, int pageSize)
+        public List<Post> GetListByUserID(long id)
         {
-            IQueryable<Post> model = db.Posts;
-            model = model.Where(x => x.UserID == id && x.Status == true);
-
-            return model.OrderByDescending(x => x.PostedDate).ToPagedList(page, pageSize);
+            return db.Posts.Where(x => x.UserID == id).OrderByDescending(x => x.PostedDate).ToList();
         }
 
         public IEnumerable<Post> GetListPaging(int page, int pageSize)
         {
-            IQueryable<Post> model = db.Posts.Where(x=>x.Status == true);
+            IQueryable<Post> model = db.Posts.Where(x => x.Status == true);
             return model.OrderByDescending(x => x.PostedDate).ToPagedList(page, pageSize);
         }
         public Post GetArticleByID(long id)

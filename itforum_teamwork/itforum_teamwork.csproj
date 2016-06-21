@@ -3578,7 +3578,6 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_HeaderBottom.cshtml" />
-    <Content Include="Views\Shared\_SliderPartial.cshtml" />
     <Content Include="Views\Shared\_HomeLayout.cshtml" />
     <Content Include="Views\Account\Signup.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />

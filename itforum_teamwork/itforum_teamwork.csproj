@@ -3024,6 +3024,7 @@
     <Content Include="Data\images\ArticleImg\wf.jpg" />
     <Content Include="Data\images\Avatar\author.jpg" />
     <Content Include="Data\images\Avatar\default_avatar.png" />
+    <Content Include="Data\images\logo.png" />
     <Content Include="Data\_thumbs\Images\ArticleImg\asp_net.png" />
     <Content Include="Data\_thumbs\Images\ArticleImg\c++.png" />
     <Content Include="Data\_thumbs\Images\ArticleImg\cau-lenh-truy-van-select-from.gif" />

@@ -138,8 +138,13 @@ namespace itforum_teamwork.Areas.Admin.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Cập nhật thông tin cá nhân không thành công");
+                    SetAlert("Cập nhật thông tin cá nhân thất bại", "error");
+                    return View();
                 }
+            }
+            else
+            {
+                ModelState.AddModelError("", "Cập nhật thông tin cá nhân không thành công");
             }
             return View("Index");
         }

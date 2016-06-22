@@ -1,10 +1,11 @@
-﻿using Model.EF;
+﻿using itforum_teamwork.Common;
+using Model.EF;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 namespace Model.DAO
 {
     public class ContactDAO
@@ -18,6 +19,44 @@ namespace Model.DAO
         public Contact GetContactInfo()
         {
             return db.Contacts.SingleOrDefault(x => x.Status == true);
+        }
+        public bool Create(Contact model)
+        {
+            try
+            {
+                db.Contacts.Add(model);
+                db.SaveChanges();
+                return true;
+            }
+            catch(DbEntityValidationException dbEx)
+            {
+                ShowError.ErrorMessage(dbEx);
+                return false;
+            }
+        }
+        public bool Edit(Contact model)
+        {
+            try
+            {
+                var contact = db.Contacts.Find(model.ContactID);
+                contact.Email = model.Email;
+                contact.Fax = model.Fax;
+                contact.Phone = model.Phone;
+                contact.Slogan = model.Slogan;
+                contact.Address = model.Address;
+                db.Entry(model);
+                db.SaveChanges();
+                return true;
+            }
+            catch (DbEntityValidationException dbEx)
+            {
+                ShowError.ErrorMessage(dbEx);
+                return false;
+            }
+        }
+        public Contact ViewDetails(int id)
+        {
+            return db.Contacts.Find(id);
         }
     }
 }

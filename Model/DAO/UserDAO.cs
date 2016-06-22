@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using PagedList;
 using System.Data.Entity.Validation;
 using System.Diagnostics;
+using itforum_teamwork.Common;
 
 namespace Model.DAO
 {
@@ -54,20 +55,7 @@ namespace Model.DAO
             }
             catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
             {
-                Exception raise = dbEx;
-                foreach (var validationErrors in dbEx.EntityValidationErrors)
-                {
-                    foreach (var validationError in validationErrors.ValidationErrors)
-                    {
-                        string message = string.Format("{0}:{1}",
-                            validationErrors.Entry.Entity.ToString(),
-                            validationError.ErrorMessage);
-                        // raise a new exception nesting  
-                        // the current instance as InnerException  
-                        raise = new InvalidOperationException(message, raise);
-                    }
-                }
-                throw raise;
+                ShowError.ErrorMessage(dbEx);
             }
             return user.UserID;
         }

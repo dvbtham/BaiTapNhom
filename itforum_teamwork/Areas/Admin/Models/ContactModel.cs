@@ -1,16 +1,15 @@
-﻿namespace Model.EF
-{
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Web;
 
-    [Table("Contact")]
-    public partial class Contact
+namespace itforum_teamwork.Areas.Admin.Models
+{
+    public class ContactModel
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        [Display(Name = "ID")]
+        [Key]
+        [Display(Name="ID")]
         public int ContactID { get; set; }
 
         [StringLength(250, ErrorMessage = "Chỉ nhập tối đa 250 ký tự")]
@@ -30,6 +29,5 @@
 
         [Display(Name = "Trạng thái")]
         public bool? Status { get; set; }
-
     }
 }

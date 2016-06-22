@@ -97,9 +97,11 @@
     <Compile Include="DAO\ManageDAO.cs" />
     <Compile Include="DAO\PictureDAO.cs" />
     <Compile Include="DAO\PostTagDAO.cs" />
+    <Compile Include="DAO\ShowError.cs" />
     <Compile Include="DAO\SocNetDAO.cs" />
     <Compile Include="DAO\TagDAO.cs" />
     <Compile Include="DAO\UserDAO.cs" />
+    <Compile Include="DAO\WebsiteDAO.cs" />
     <Compile Include="EF\Asset.cs" />
     <Compile Include="EF\AssetType.cs" />
     <Compile Include="EF\Category.cs" />

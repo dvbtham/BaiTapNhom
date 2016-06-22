@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using PagedList;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using itforum_teamwork.Common;
 
 namespace Model.DAO
 {
@@ -36,31 +37,7 @@ namespace Model.DAO
         {
             return db.Posts.Where(x => x.CategoryID == id).ToList();
         }
-        //public IEnumerable<Post> GetListOfArticlePagging(string searchString, int page, int pageSize)
-        //{
-        //    IQueryable<Post> model = db.Posts;
-        //    if (!string.IsNullOrEmpty(searchString))
-        //    {
-        //        model = model.Where(x => x.Title.Contains(searchString) || x.Content.Contains(searchString) || x.Detail.Contains(searchString) && x.Status == true);
-        //    }
-        //    return model.OrderByDescending(x => x.PostedDate).ToPagedList(page, pageSize);
-        //}
-        //public IEnumerable<Post> GetArticlePaggingByUser(string searchString, long? id, int page, int pageSize)
-        //{
-        //    IQueryable<Post> model = db.Posts.Where(x => x.UserID == id && x.Status == true);
-        //    if (!string.IsNullOrEmpty(searchString))
-        //    {
-        //        model = model.Where(x => x.Title.Contains(searchString) || x.Content.Contains(searchString) || x.Detail.Contains(searchString) && x.Status == true);
-        //    }
-        //    return model.OrderByDescending(x => x.PostedDate).ToPagedList(page, pageSize);
-        //}
-        //public IEnumerable<Post> GetListByCatID(long id, int page, int pageSize)
-        //{
-        //    IQueryable<Post> model = db.Posts;
-        //    model = model.Where(x => x.CategoryID == id && x.Status == true);
-
-        //    return model.OrderByDescending(x => x.PostedDate).ToPagedList(page, pageSize);
-        //}
+       
         //Danh sách 10 bài viết nổi bật
         public List<Post> GetArticleTop10()
         {
@@ -175,20 +152,7 @@ namespace Model.DAO
             }
             catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
             {
-                Exception raise = dbEx;
-                foreach (var validationErrors in dbEx.EntityValidationErrors)
-                {
-                    foreach (var validationError in validationErrors.ValidationErrors)
-                    {
-                        string message = string.Format("{0}:{1}",
-                            validationErrors.Entry.Entity.ToString(),
-                            validationError.ErrorMessage);
-                        // raise a new exception nesting  
-                        // the current instance as InnerException  
-                        raise = new InvalidOperationException(message, raise);
-                    }
-                }
-                throw raise;
+                ShowError.ErrorMessage(dbEx);
             }
             return post.PostID;
         }

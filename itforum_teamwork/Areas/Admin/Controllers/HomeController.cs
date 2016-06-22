@@ -9,7 +9,6 @@ namespace itforum_teamwork.Areas.Admin.Controllers
 {
     public class HomeController : BaseController
     {
-        // GET: Admin/Home
         public ActionResult Index()
         {
             ViewBag.PostsCounter = new CategoryDAO().GetItemNumber();

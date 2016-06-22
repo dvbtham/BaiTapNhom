@@ -12,5 +12,6 @@ namespace itforum_teamwork.Areas.Admin.Models
 
         [Display(Name="Ghi nhớ?")]
         public bool RememberMe { get; set; }
+        public string ReturnUrl { get; set; }
     }
 }

@@ -10,7 +10,7 @@
         <div class="col-sm-4 col-sm-offset-1">
             <h4>Đăng nhập bằng tài khoản itForum</h4>
             <div class="login-form">
-                @using (Html.BeginForm("Login", "Login", FormMethod.Post))
+                @using (Html.BeginForm("Login", "Login", new { ReturnUrl = Request.QueryString["ReturnUrl"] }, FormMethod.Post))
                 {
                     @Html.ValidationSummary(false, "", new { @class = "text-danger" });
                     <fieldset>

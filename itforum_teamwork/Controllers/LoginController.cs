@@ -11,6 +11,7 @@ namespace itforum_teamwork.Controllers
 {
     public class LoginController : Controller
     {
+        [AllowAnonymous]
         public ActionResult Login()
         {
             Account account = CheckCookie();
@@ -24,13 +25,12 @@ namespace itforum_teamwork.Controllers
                 var user = userDAO.GetUserByEmail(account.Email);
 
                 AddLoginSession(user);
-
                 return RedirectToAction("Index", "Home");
             }
         }
-
+        [AllowAnonymous]
         [HttpPost]
-        public ActionResult Login(LoginModel loginModel)
+        public ActionResult Login(LoginModel loginModel, string ReturnUrl)
         {
 
             if (ModelState.IsValid)
@@ -55,8 +55,16 @@ namespace itforum_teamwork.Controllers
                         ckPassword.Value = loginModel._Account.Password;
                         Response.Cookies.Add(ckPassword);
                     }
+                    loginModel.ReturnUrl = ReturnUrl;
+                    if (!string.IsNullOrEmpty(loginModel.ReturnUrl))
+                    {
+                        return Redirect(loginModel.ReturnUrl);
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
 
-                    return RedirectToAction("Index", "Home");
                 }
                 else
                     if (res == 0)

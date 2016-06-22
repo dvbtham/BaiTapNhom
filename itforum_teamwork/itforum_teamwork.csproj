@@ -210,6 +210,7 @@
     <Compile Include="Areas\Admin\Controllers\AssetsController.cs" />
     <Compile Include="Areas\Admin\Controllers\BaseController.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ContactController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
     <Compile Include="Areas\Admin\Controllers\PictureController.cs" />
@@ -218,9 +219,11 @@
     <Compile Include="Areas\Admin\Controllers\SendingEmailController.cs" />
     <Compile Include="Areas\Admin\Controllers\TagController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
+    <Compile Include="Areas\Admin\Controllers\WebsiteController.cs" />
     <Compile Include="Areas\Admin\Models\Account.cs" />
     <Compile Include="Areas\Admin\Models\ArticleViewModel.cs" />
     <Compile Include="Areas\Admin\Models\AssetViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\ContactModel.cs" />
     <Compile Include="Areas\Admin\Models\LoginModel.cs" />
     <Compile Include="Areas\Admin\Models\UserViewModel.cs" />
     <Compile Include="Hubs\CounterHub.cs" />
@@ -703,6 +706,9 @@
     <Content Include="Areas\Admin\Views\Assets\_AjaxAssetsList.cshtml" />
     <Content Include="Areas\Admin\Views\Assets\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Assets\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Contact\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Website\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Contact\Edit.cshtml" />
     <None Include="Content\Admin\dist\js\jquery-1.8.3-vsdoc.js" />
     <Content Include="Content\Admin\dist\js\jquery-1.8.3.js" />
     <Content Include="Content\Admin\dist\js\jquery-1.8.3.min.js" />

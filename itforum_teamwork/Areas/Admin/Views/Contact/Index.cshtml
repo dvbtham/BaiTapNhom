@@ -1,0 +1,76 @@
+﻿@model Model.EF.Contact
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@section header{
+    Thông tin liên hệ
+}
+
+<div>
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        @if (Model.Email == null)
+        {
+            <a href="#">Cập nhật Email</a>
+        }
+        else
+        {
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+        }
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+        @if (Model.Phone == null)
+        {
+            <dd><span class="text-danger">Không có số điện thoại liên lạc</span> </dd>
+        }
+        else
+        {
+            <dd>
+                @Html.DisplayFor(model => model.Phone)
+            </dd>
+        }
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fax)
+        </dt>
+
+        @if (Model.Fax == null)
+        {
+            <dd><span class="text-danger">Không có số máy Fax</span> <a href="/admin/contact/edit/@Model.ContactID"><i class="fa fa-edit" title="Cập nhật"></i></a></dd>
+        }
+        else
+        {
+            <dd>
+                @Html.DisplayFor(model => model.Fax)
+            </dd>
+        }
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+        @if (Model.Address == null)
+        {
+            <dd><span class="text-danger">Không có thông tin địa chỉ</span> <a href="#"><i class="fa fa-edit" title="Cập nhật"></i></a></dd>
+        }
+        else
+        {
+            <dd>
+                @Html.DisplayFor(model => model.Address)
+            </dd>
+        }
+    </dl>
+   <a href="/admin/contact/edit/@Model.ContactID"><button class="btn btn-primary">Cập nhật</button></a>
+</div>
+

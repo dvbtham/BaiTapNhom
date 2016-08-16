@@ -18,7 +18,7 @@ namespace Model.DAO
         {
             db = new itforumEntities();
         }
-        public int? AddViews(long id)
+        public long? AddViews(long id)
         {
             var post = db.Posts.Find(id);
             post.Views += 1;
@@ -27,7 +27,7 @@ namespace Model.DAO
 
         public List<Post> GetPosts()
         {
-            return db.Posts.Where(x => x.Status == true).ToList();
+            return db.Posts.Where(x => x.Status == true).OrderByDescending(x => x.PostedDate).ToList();
         }
         public List<Post> GetPostsByUserID(long id)
         {
@@ -70,11 +70,11 @@ namespace Model.DAO
                          select new
                          {
                              ID = b.TagID,
-                             Name = a.Name
+                             Name = a.TagName
                          }).AsEnumerable().Select(x => new Tag()
                          {
                              TagID = x.ID,
-                             Name = x.Name
+                             TagName = x.Name
                          });
             return model.ToList();
         }
@@ -88,7 +88,7 @@ namespace Model.DAO
                          select new
                          {
                              Title = a.Title,
-                             ImageShowOnHome = a.ImageShowOnHome,
+                             ImageShowOnHome = a.Avatar,
                              Content = a.Content,
                              PostedDate = a.PostedDate,
                              UserID = a.UserID,
@@ -98,7 +98,7 @@ namespace Model.DAO
                          }).AsEnumerable().Select(x => new Post()
                          {
                              Title = x.Title,
-                             ImageShowOnHome = x.ImageShowOnHome,
+                             Avatar = x.ImageShowOnHome,
                              Content = x.Content,
                              PostedDate = x.PostedDate,
                              UserID = x.UserID,
@@ -163,17 +163,15 @@ namespace Model.DAO
                 var postModel = db.Posts.Find(post.PostID);
 
                 postModel.CategoryID = post.CategoryID;
-                postModel.Detail = post.Detail;
+                postModel.ShortContent = post.ShortContent;
                 postModel.Content = post.Content;
                 postModel.UserID = post.UserID;
                 postModel.Title = post.Title;
 
-                if (!string.IsNullOrEmpty(postModel.ImageShowOnHome))
-                    postModel.ImageShowOnHome = post.ImageShowOnHome;
+                if (!string.IsNullOrEmpty(postModel.Avatar))
+                    postModel.Avatar = post.Avatar;
                 else
-                    post.ImageShowOnHome = "/Data/images/ArticleImg/no_image.png";
-
-                postModel.PostedDate = post.PostedDate;
+                    post.Avatar = "/Data/images/ArticleImg/no_image.png";
                 postModel.Status = post.Status;
                 postModel.Views = post.Views;
 
@@ -207,9 +205,8 @@ namespace Model.DAO
             try
             {
                 var post = db.Posts
-                    .Include(x => x.PostTags)
-                    .Include(x => x.Pictures)
-                    .Include(x => x.Videos)
+                    .Include("PostTags")
+                    .Include("User")
                     .SingleOrDefault(x => x.PostID == id);
 
                 db.Posts.Remove(post);

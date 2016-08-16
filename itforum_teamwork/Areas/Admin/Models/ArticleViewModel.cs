@@ -21,10 +21,10 @@ namespace itforum_teamwork.Areas.Admin.Models
 
         [StringLength(500)]
         [Display(Name = "Tóm tắt")]
-        public string Content { get; set; }
+        public string ShortContent { get; set; }
 
         [Display(Name = "Nội dung chi tiết")]
-        public string Detail { get; set; }
+        public string Content { get; set; }
 
         [Display(Name = "Danh mục")]
         public int? CategoryID { get; set; }
@@ -33,7 +33,7 @@ namespace itforum_teamwork.Areas.Admin.Models
         public bool? Status { get; set; }
 
         [Display(Name = "Ảnh đại diện")]
-        public string ImageShowOnHome { get; set; }
+        public string Avatar { get; set; }
 
         [Display(Name = "Ngày đăng")]
         public DateTime? PostedDate { get; set; }

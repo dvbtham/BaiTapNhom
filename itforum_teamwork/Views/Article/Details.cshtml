@@ -9,7 +9,7 @@
     var userModel = userDAO.GetUserByID(Model.UserID);
     var catModel = catDAO.GetCategoryByID(Model.CategoryID);
     //Lay link mang xa hoi
-    var socnetModel = new Model.DAO.SocNetDAO().GetSocNet(Model.UserID,"FB");
+    var socnetModel = new Model.DAO.SocNetDAO().GetSocNet(Model.UserID,1);
     var linkByUser = "/bai-viet/tac-gia/" + ConvertToUnsign.ConvertToUnSign(userModel.Name).ToLower() + "-" + Model.UserID;
     var linkByCategory = "/bai-viet/danh-muc/" + ConvertToUnsign.ConvertToUnSign(catModel.CategoryName).ToLower() + "-" + Model.CategoryID;
 
@@ -33,11 +33,11 @@
             <ul>
                 <li><i class="fa fa-user"></i><a href="@linkByUser">@userModel.Name</a></li>
                 <li><i class="fa fa-th-list"></i><a href="@linkByCategory">@catModel.CategoryName</a></li>
-                <li title="@Common.TimeHelper.TimeAgo(Convert.ToDateTime(Model.PostedDate))"><i class="fa fa-calendar"></i> @String.Format("{0:dd/MM/yyyy}", Model.PostedDate);</li>
+                <li title="@Common.TimeHelper.TimeAgo(Convert.ToDateTime(Model.PostedDate))"><i class="fa fa-calendar"></i> @String.Format("{0:dd/MM/yyyy}", Model.PostedDate)</li>
                 <li><i class="fa fa-eye"></i>@Model.Views</li>
             </ul>
         </div>
-        @Html.Raw(Model.Detail)
+        @Html.Raw(Model.Content)
         <div class="pager-area">
             <ul class="pager pull-right">
 
@@ -60,8 +60,8 @@
                     {
                         foreach (var tag in tags)
                         {
-                            var linkByTag = "/bai-viet/tag/" + ConvertToUnsign.ConvertToUnSign(tag.Name) + "-" + tag.TagID;
-                            <li><a class="color" href="@linkByTag">@tag.Name <span>/</span></a></li>
+                            var linkByTag = "/bai-viet/tag/" + ConvertToUnsign.ConvertToUnSign(tag.TagName) + "-" + tag.TagID;
+                            <li><a class="color" href="@linkByTag">@tag.TagName <span>/</span></a></li>
                         }
                     }
                     else

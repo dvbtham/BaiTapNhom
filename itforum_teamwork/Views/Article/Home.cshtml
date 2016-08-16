@@ -28,7 +28,7 @@
         <div class="col-sm-12 ">
             <div class="col-sm-4 post_info">
                 <div class="pic_box">
-                    <img class="img-responsive" src="@Url.Content(""+item.ImageShowOnHome)" width="270" height="280" alt="@item.Title" />
+                    <img class="img-responsive" src="@Url.Content(""+item.Avatar)" width="270" height="280" alt="@item.Title" />
                 </div>
                 <div class="overlay">
                     <ul class="info">
@@ -53,7 +53,7 @@
             </div>
             <div class="col-sm-7 col-sm-offset-1">
                 <a href="@linkRead"><h4>@item.Title</h4></a>
-                <p>@Html.Raw(item.Content)</p>
+                <p>@Html.Raw(item.ShortContent)</p>
                 <button class="btn btn-primary">
                     <a href="@linkRead"> Xem thêm </a><span class="glyphicon glyphicon-chevron-right"></span>
                 </button>

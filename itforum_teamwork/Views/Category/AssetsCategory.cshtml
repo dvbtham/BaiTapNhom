@@ -3,8 +3,8 @@
     <ul class="nav nav-pills nav-assets">
         @foreach(var item in Model)
         {
-            var byType = "/tai-nguyen/the-loai/" + itforum_teamwork.Common.ConvertToUnsign.ConvertToUnSign(item.AssetName).ToLower() + "-" + item.AssetTypeID;
-            <li><a href="@byType">@item.AssetName</a></li>
+            var byType = "/tai-nguyen/the-loai/" + itforum_teamwork.Common.ConvertToUnsign.ConvertToUnSign(item.Name).ToLower() + "-" + item.AssetTypeID;
+            <li><a href="@byType">@item.Name</a></li>
         }
         
     </ul>

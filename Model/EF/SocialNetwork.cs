@@ -19,8 +19,7 @@
 
         public long? UserID { get; set; }
 
-        [StringLength(3)]
-        public string SNTypeID { get; set; }
+        public int SNTypeID { get; set; }
 
         public virtual SocNetType SocNetType { get; set; }
 

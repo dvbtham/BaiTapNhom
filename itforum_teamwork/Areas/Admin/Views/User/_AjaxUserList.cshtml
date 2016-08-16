@@ -73,7 +73,8 @@
                                {
                                    Confirm = "Bạn thật sự muốn xóa người dùng " + item.Name + "?",
                                    OnComplete = "$('#row_" + @item.UserID + "').remove()",
-                                   HttpMethod = "Delete"
+                                   HttpMethod = "Delete",
+                                   OnSuccess = "window.location.reload()"
                                })
                 </td>
 

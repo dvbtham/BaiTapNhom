@@ -69,7 +69,7 @@ namespace itforum_teamwork.Controllers
                 else
                     if (res == 0)
                     {
-                        ModelState.AddModelError("", "Tài khoản không tồn tại");
+                        ModelState.AddModelError("", "Tài khoản không tồn tại. Vui lòng tạo mới tài khoản");
                     }
                     else
                         if (res == 2)

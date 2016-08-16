@@ -32,11 +32,11 @@
         [StringLength(500)]
         [Display(Name = "Tóm tắt")]
         [Required(ErrorMessage = "Bạn chưa nhập tóm tắt nội dung")]
-        public string Content { get; set; }
+        public string ShortContent { get; set; }
 
         [Display(Name = "Nội dung")]
         [Required(ErrorMessage = "Bạn chưa nhập nội dung bài viết")]
-        public string Detail { get; set; }
+        public string Content { get; set; }
 
         [Display(Name = "Danh mục")]
         public int? CategoryID { get; set; }
@@ -45,7 +45,7 @@
         public bool? Status { get; set; }
 
         [Display(Name = "Ảnh đại diện")]
-        public string ImageShowOnHome { get; set; }
+        public string Avatar { get; set; }
 
         [Display(Name = "Ngày đăng")]
         [DataType(DataType.Date)]
@@ -53,7 +53,7 @@
         public DateTime? PostedDate { get; set; }
 
         [Display(Name = "Lượt xem")]
-        public int? Views { get; set; }
+        public long? Views { get; set; }
 
         public virtual Category Category { get; set; }
 

@@ -12,7 +12,7 @@ namespace itforum_teamwork.Areas.Admin.Controllers
 {
     public class AssetsController : BaseController
     {
-        private const int defaultPageSize = 5;
+        private const int defaultPageSize = 10;
         public ActionResult Index(string searchString, int? page)
         {
             ViewBag.SearchString = searchString;
@@ -82,7 +82,7 @@ namespace itforum_teamwork.Areas.Admin.Controllers
                 asset.Title = model.Title;
                 asset.Link = model.Link;
                 asset.LinkDuPhong = model.LinkDuPhong;
-                asset.PostedDate = DateTime.Now;
+                asset.CreatedDate = DateTime.Now;
                 asset.Status = true;
                 asset.UserID = model.UserID;
                 asset.ShortContent = model.ShortContent;

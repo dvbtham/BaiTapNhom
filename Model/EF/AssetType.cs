@@ -18,7 +18,7 @@ namespace Model.EF
         public int AssetTypeID { get; set; }
 
         [StringLength(150)]
-        public string AssetName { get; set; }
+        public string Name { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Asset> Assets { get; set; }

@@ -29,7 +29,7 @@ namespace Model.DAO
             IQueryable<Tag> tag = db.Tags;
             if (!string.IsNullOrEmpty(searchString))
             {
-                tag = tag.Where(x => x.Name.Contains(searchString));
+                tag = tag.Where(x => x.TagName.Contains(searchString));
             }
             return tag.OrderByDescending(x => x.TagID).ToPagedList(page, pageSize);
         }
@@ -57,7 +57,7 @@ namespace Model.DAO
             try
             {
                 var tagModel = db.Tags.Find(tag.TagID);
-                tagModel.Name = tag.Name;
+                tagModel.TagName = tag.TagName;
                 db.SaveChanges();
                 return true;
             }

@@ -49,15 +49,15 @@ namespace itforum_teamwork.Controllers
                 var session = (UserLogin)Session[itforum_teamwork.Common.CommonConstants.CLIENT_USER_SESSION];
                 post.UserID = session.UserID;
                 post.Content = postModel.Content;
-                post.Detail = postModel.Detail;
+                post.ShortContent = postModel.ShortContent;
                 post.CategoryID = postModel.CategoryID;
                 post.PostedDate = DateTime.Now;
                 post.Status = true;
                 post.Views = 0;
-                if (!string.IsNullOrEmpty(postModel.ImageShowOnHome))
-                    post.ImageShowOnHome = postModel.ImageShowOnHome;
+                if (!string.IsNullOrEmpty(postModel.Avatar))
+                    post.Avatar = postModel.Avatar;
                 else
-                    post.ImageShowOnHome = "/Data/images/ArticleImg/no_image.png";
+                    post.Avatar = "/Data/images/ArticleImg/no_image.png";
 
                 var result = dao.Insert(post);
                 if (result > 0)

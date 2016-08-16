@@ -5,10 +5,10 @@
 
         @foreach (var tag in Model)
         {
-            var linkByTag = "/bai-viet/tag/" + ConvertToUnsign.ConvertToUnSign(tag.Name).ToLower() + "-" + tag.TagID;   
+            var linkByTag = "/bai-viet/tag/" + ConvertToUnsign.ConvertToUnSign(tag.TagName).ToLower() + "-" + tag.TagID;   
             <li>
                 <a class="color" href="@linkByTag">
-                    <span class="glyphicon glyphicon-tag" style="margin-right:10px"></span>@tag.Name.ToLower()
+                    <span class="glyphicon glyphicon-tag" style="margin-right:10px"></span>@tag.TagName.ToLower()
                 </a>
             </li>
         }

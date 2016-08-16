@@ -14,7 +14,7 @@
         var userModel = userDao.GetUserByID(item.UserID);
         var readMore = "/tai-nguyen/" + itforum_teamwork.Common.ConvertToUnsign.ConvertToUnSign(item.Title).ToLower() + "-" + item.AssetID;
         var byUser = "/tai-nguyen/nguoi-dang/" + itforum_teamwork.Common.ConvertToUnsign.ConvertToUnSign(userModel.Name).ToLower() + "-" + item.UserID;
-        var byType = "/tai-nguyen/the-loai/" + itforum_teamwork.Common.ConvertToUnsign.ConvertToUnSign(assetType.AssetName).ToLower() + "-" + item.AssetTypeID;
+        var byType = "/tai-nguyen/the-loai/" + itforum_teamwork.Common.ConvertToUnsign.ConvertToUnSign(assetType.Name).ToLower() + "-" + item.AssetTypeID;
 
         <div class="col-sm-12 ">
             <div class="col-sm-4 post_info">
@@ -27,8 +27,8 @@
                 <div class="post-meta">
                     <i class="fa fa-user"></i><a href="@byUser"> @userModel.Name </a>
                     <i class="fa fa-th-list"></i><a href="@byType">
-    @assetType.AssetName</a>
-                    <i class="fa fa-calendar"></i> @item.PostedDate
+    @assetType.Name</a>
+                    <i class="fa fa-calendar"></i>@String.Format("{0:dd/MM/yyyy}", item.CreatedDate)
                     <i class="fa fa-eye"></i> @item.Views
 </div>
                 <hr />

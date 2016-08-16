@@ -16,11 +16,11 @@
                             <div class="@itemClass">
                                 <div class="col-sm-6">
                                     <h2>@itemModel.Title</h2>
-                                    <p>@Html.Raw(itemModel.Content)</p>
+                                    <p>@Html.Raw(itemModel.ShortContent)</p>
                                     <button type="button" class="btn btn-default get"><a href="@linkRead">Đọc tiếp</a></button>
                                 </div>
                                 <div class="col-sm-6">
-                                    <img src="@Url.Content("" + itemModel.ImageShowOnHome )" class="image-slider img-responsive" width="250" alt="@itemModel.Title" />
+                                    <img src="@Url.Content("" + itemModel.Avatar )" class="image-slider img-responsive" width="250" alt="@itemModel.Title" />
                                 </div>
                             </div>
                         }

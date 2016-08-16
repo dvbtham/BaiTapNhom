@@ -67,7 +67,8 @@
                                {
                                    Confirm = "Bạn thật sự muốn bài viết này xóa?",
                                    OnComplete = "$('#row_" + @item.PostID + "').remove()",
-                                   HttpMethod = "Delete"
+                                   HttpMethod = "Delete",
+                                   OnSuccess = "window.location.reload()"
                                })
                 </td>
             </tr>

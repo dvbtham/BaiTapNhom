@@ -26,10 +26,10 @@
                     @Html.DisplayFor(modelItem => item.Title)
                 </td>
                 <td>
-                    @assetType.AssetName
+                    @assetType.Name
                 </td>
                 <td>
-                    @Convert.ToDateTime(item.PostedDate).ToShortDateString()
+                    @Convert.ToDateTime(item.CreatedDate).ToShortDateString()
                 </td>
                 <td>
                     @userModel.Name

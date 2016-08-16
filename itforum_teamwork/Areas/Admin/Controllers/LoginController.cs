@@ -56,7 +56,6 @@ namespace itforum_teamwork.Areas.Admin.Controllers
                     var userSession = new UserLogin();
                     userSession.Email = user.Email;
                     userSession.UserID = user.UserID;
-                    Session["userID"] = user.UserID; ;
 
                     Session.Add(CommonConstants.ADMIN_USER_SESSION, userSession);
                     if (loginModel.RememberMe)
@@ -109,7 +108,6 @@ namespace itforum_teamwork.Areas.Admin.Controllers
         public ActionResult Logout()
         {
             Session.Remove("ADMIN_USER_SESSION");
-            Session["userID"] = null;
 
             if (Response.Cookies["email"] != null)
             {

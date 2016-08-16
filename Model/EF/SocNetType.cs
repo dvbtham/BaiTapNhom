@@ -16,8 +16,7 @@
         }
 
         [Key]
-        [StringLength(3)]
-        public string SNTypeID { get; set; }
+        public int SNTypeID { get; set; }
 
         [StringLength(50)]
         public string SNTypeName { get; set; }

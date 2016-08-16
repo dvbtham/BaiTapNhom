@@ -19,7 +19,7 @@
         [Column(Order = 1)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [Display(Name = "Tag")]
-        public long TagID { get; set; }
+        public int TagID { get; set; }
 
         public int? Views { get; set; }
 

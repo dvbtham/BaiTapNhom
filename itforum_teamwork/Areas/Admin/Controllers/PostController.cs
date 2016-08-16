@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Model.DAO;
 using MvcPaging;
 using Model.EF;
+using itforum_teamwork.Common;
 
 namespace itforum_teamwork.Areas.Admin.Controllers
 {
@@ -26,7 +27,7 @@ namespace itforum_teamwork.Areas.Admin.Controllers
                 posts = posts.Where(x => x.Title.ToLower().Contains(searchString)).ToPagedList(currentPageIndex, defaultPageSize);
             }
             if (Request.IsAjaxRequest())
-                return PartialView("_AjaxPostList",posts);
+                return PartialView("_AjaxPostList", posts);
             else
                 return View(posts);
         }
@@ -41,20 +42,21 @@ namespace itforum_teamwork.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                var session = (UserLogin)Session[itforum_teamwork.Common.CommonConstants.ADMIN_USER_SESSION];
                 var dao = new ArticleDAO();
                 var post = new Post();
                 post.Title = postModel.Title;
-                post.UserID = Convert.ToInt64(Session["userID"]);
+                post.UserID = session.UserID;
                 post.Content = postModel.Content;
-                post.Detail = postModel.Detail;
+                post.ShortContent = postModel.ShortContent;
                 post.CategoryID = postModel.CategoryID;
                 post.PostedDate = DateTime.Now;
                 post.Status = true;
                 post.Views = 0;
-                if (!string.IsNullOrEmpty(post.ImageShowOnHome))
-                    post.ImageShowOnHome = postModel.ImageShowOnHome;
+                if (!string.IsNullOrEmpty(post.Avatar))
+                    post.Avatar = postModel.Avatar;
                 else
-                    post.ImageShowOnHome = "/Data/images/ArticleImg/no_image.png";
+                    post.Avatar = "/Data/images/ArticleImg/no_image.png";
 
                 var result = dao.Insert(post);
                 if (result > 0)
@@ -109,7 +111,7 @@ namespace itforum_teamwork.Areas.Admin.Controllers
         public ActionResult Delete(int id)
         {
             var result = new ArticleDAO().Delete(id);
-            if(result)
+            if (result)
             {
                 SetAlert("Bài viết của bạn đã được xóa", "success");
                 return RedirectToAction("Index");

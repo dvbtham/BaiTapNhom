@@ -9,7 +9,7 @@
     public partial class Asset
     {
         [Display(Name = "ID")]
-        public long AssetID { get; set; }
+        public int AssetID { get; set; }
 
         [StringLength(150)]
         [Display(Name = "Tiêu đề")]
@@ -35,7 +35,7 @@
         [Display(Name = "Ngày đăng")]
 
         [DataType(DataType.Date)]
-        public DateTime? PostedDate { get; set; }
+        public DateTime? CreatedDate { get; set; }
 
         [Display(Name = "Lượt xem")]
         public long? Views { get; set; }

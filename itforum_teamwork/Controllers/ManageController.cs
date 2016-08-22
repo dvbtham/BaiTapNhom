@@ -77,5 +77,39 @@ namespace itforum_teamwork.Controllers
             }
             return RedirectToAction("Login", "Login");
         }
+        //Đổi mật khẩu
+        public ActionResult ResetPassword(User user)
+        {
+            if (ModelState.IsValid)
+            {
+                var currPass = user.Password;
+                var dao = new UserDAO();
+                if (!string.IsNullOrEmpty(user.Password))
+                {
+                    if (currPass.Length != 32)
+                    {
+                        var encryptesMD5Pas = Encryptor.MD5Hash(user.Password);
+                        user.Password = encryptesMD5Pas;
+                    }
+                    else
+                        user.Password = currPass;
+                }
+
+                var result = dao.Update(user);
+                if (result)
+                {
+                    SetAlert("Cập nhật thông tin cá nhân thành công", "success");
+                    var session = (UserLogin)Session[itforum_teamwork.Common.CommonConstants.CLIENT_USER_SESSION];
+                    session.Name = user.Name;
+                    var userModel = new ManageDAO().GetUserByID(Convert.ToInt64(session.UserID));
+                    return View("Index", userModel);
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Cập nhật thông tin cá nhân không thành công");
+                }
+            }
+            return View();
+        }
     }
 }

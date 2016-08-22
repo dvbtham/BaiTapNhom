@@ -119,7 +119,7 @@ namespace itforum_teamwork.Areas.Admin.Controllers
         public void SetTypeName(int? selectedID = null)
         {
             var dao = new AssetsDAO();
-            ViewBag.AssetTypeID = new SelectList(dao.ListType(), "AssetTypeID", "AssetName", selectedID);
+            ViewBag.AssetTypeID = new SelectList(dao.ListType(), "AssetTypeID", "Name", selectedID);
         }
         public ActionResult Delete(int id)
         {

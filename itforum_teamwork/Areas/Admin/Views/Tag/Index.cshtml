@@ -29,7 +29,7 @@
     foreach (var item in Model)
     {
         <button class="btn btn-default tag-btn" value="@item.TagID">
-            <a href="/Admin/Tag/Edit/@item.TagID" title="Chỉnh sửa">@item.Name</a>
+            <a href="/Admin/Tag/Edit/@item.TagID" title="Chỉnh sửa">@item.TagName</a>
             <a href="/Admin/Tag/Delete/@item.TagID" onclick="return DeleteConfirm()"><i class="fa fa-remove" title="Xóa tag"></i></a>
         </button>
     }

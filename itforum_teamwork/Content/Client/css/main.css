@@ -17,6 +17,9 @@ body {
     border-bottom: 1px solid #eaa34c;
     margin-bottom: 5px;
 }
+span.badge {
+    background: blueviolet;
+}
 
 ::selection {
     background-color: #FE980F;
@@ -66,8 +69,20 @@ span > a {
     cursor: pointer;
 }
 
-.italic {
+strong.keywords {
     font-style: italic;
+    color: blueviolet;
+}
+.slogan{
+    width:350px;
+    float:left;
+}
+.slogan p{
+    text-align:left;
+    padding: 10px 10px;
+    color:#E78118;
+    overflow:hidden;
+    font-size:15px;
 }
 
 .bold {
@@ -112,7 +127,8 @@ button > a {
     color: white;
 }
 
-.logo {
+img.logo {
+    float:left;
     width: 139px;
     height: 39px;
 }

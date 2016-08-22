@@ -23,6 +23,7 @@ namespace itforum_teamwork
             //css client
             bundles.Add(new StyleBundle("~/bundles/csscore").Include(
                       "~/Content/Client/css/bootstrap.min.css",
+                      "~/Content/Client/css/font-awesome.min.css",
                       "~/Content/Client/css/prettyPhoto.css",
                       "~/Content/Client/css/animate.css",
                       "~/Content/Client/css/main.css",

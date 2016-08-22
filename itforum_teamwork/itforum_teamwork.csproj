@@ -1781,6 +1781,7 @@
     <Content Include="Content\Admin\plugins\ckfinder\_samples\standalone_v1.html" />
     <Content Include="Content\Client\css\animate.css" />
     <Content Include="Content\Client\css\bootstrap.min.css" />
+    <Content Include="Content\Client\css\font-awesome.css" />
     <Content Include="Content\Client\css\main.css" />
     <Content Include="Content\Client\css\prettyPhoto.css" />
     <Content Include="Content\Client\css\price-range.css" />
@@ -3622,6 +3623,8 @@
     <Content Include="Views\Article\PostByCatID.cshtml" />
     <Content Include="Views\Post\_AjaxPostList.cshtml" />
     <Content Include="Views\Shared\_FooterPartial.cshtml" />
+    <Content Include="Views\Shared\_LogoPartial.cshtml" />
+    <Content Include="Views\Shared\_AboutSocial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

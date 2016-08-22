@@ -7,20 +7,20 @@
     var userModel = userDAO.GetUserByID(Model.UserID);
     var assModel = catDAO.GetAssetTypeByID(Model.AssetTypeID);
     var byUser = "/tai-nguyen/nguoi-dang/" + itforum_teamwork.Common.ConvertToUnsign.ConvertToUnSign(userModel.Name).ToLower() + "-" + Model.UserID;
-    var byType = "/tai-nguyen/the-loai/" + itforum_teamwork.Common.ConvertToUnsign.ConvertToUnSign(assModel.AssetName).ToLower() + "-" + Model.AssetTypeID;
+    var byType = "/tai-nguyen/the-loai/" + itforum_teamwork.Common.ConvertToUnsign.ConvertToUnSign(assModel.Name).ToLower() + "-" + Model.AssetTypeID;
 
-    var linkByAssetType = "/tai-nguyen/" + itforum_teamwork.Common.ConvertToUnsign.ConvertToUnSign(assModel.AssetName).ToLower() + "-" + Model.AssetTypeID;
+    var linkByAssetType = "/tai-nguyen/" + itforum_teamwork.Common.ConvertToUnsign.ConvertToUnSign(assModel.Name).ToLower() + "-" + Model.AssetTypeID;
 
     
 }
 <div class="blog-post-area">
-    <h2 class="title text-center">@assModel.AssetName</h2>
+    <h2 class="title text-center">@assModel.Name</h2>
     <div class="single-blog-post">
         <div class="row">
             <div class="btn-group btn-breadcrumb">
                 <a href="/" class="btn btn-warning"><i class="glyphicon glyphicon-home"></i></a>
                 <a href="/tai-nguyen" class="btn btn-warning active">Tài nguyên</a>
-                <a href="@byType" class="btn btn-warning"> @assModel.AssetName</a>
+                <a href="@byType" class="btn btn-warning"> @assModel.Name</a>
                 <a class="btn btn-warning disabled"> @Model.Title</a>
             </div>
         </div>
@@ -28,7 +28,7 @@
         <div class="post-meta">
             <ul>
                 <li><i class="fa fa-user"></i><a href="@byUser"> @userModel.Name</a></li>
-                <li><i class="fa fa-th-list"></i><a href="@byUser"> @assModel.AssetName</a> </li>
+                <li><i class="fa fa-th-list"></i><a href="@byUser"> @assModel.Name</a> </li>
                 <li><i class="fa fa-calendar"></i> @Model.CreatedDate</li>
                 <li><i class="fa fa-eye"></i> @Model.Views</li>
             </ul>
@@ -54,14 +54,14 @@
             </ul>
         </div>
         <div class="panel panel-footer panel-primary" >
-            <a href="@Model.Link" target="_blank" title="@Model.PostedDate"><i class="fa fa-download pointer" title="Tải về"></i> @Model.Title</a>
+            <a href="@Model.Link" target="_blank" title="@Model.CreatedDate"><i class="fa fa-download pointer" title="Tải về"></i> @Model.Title</a>
             <p class="pull-right">Lượt tải: <span>12</span></p>
         </div>
         @if (Model.LinkDuPhong != null)
         {
             <p>Link dự phòng: </p>
             <div class="panel panel-heading">
-                <a href="@Model.LinkDuPhong" target="_blank" title="@Model.PostedDate"><i class="fa fa-download pointer" title="Tải về"> Click để tải xuống</i></a>
+                <a href="@Model.LinkDuPhong" target="_blank" title="@Model.CreatedDate"><i class="fa fa-download pointer" title="Tải về"> Click để tải xuống</i></a>
             </div>
         }
         <div class="rating-area">

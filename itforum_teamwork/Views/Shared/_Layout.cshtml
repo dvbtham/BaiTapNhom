@@ -9,7 +9,6 @@
     <meta property="fb:app_id" content="1750459958499714" />
     <meta property="fb:admins" content="100010640762642" />
     <title>@ViewBag.Title</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
     @Styles.Render("~/bundles/csscore")
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -43,13 +42,7 @@
                         </div>
                     </div>
                     <div class="col-sm-6">
-                        <div class="social-icons pull-right">
-                            <ul class="nav navbar-nav">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-youtube"></i></a></li>
-                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                            </ul>
-                        </div>
+                        @Html.Partial("_AboutSocial")
                     </div>
                 </div>
             </div>
@@ -58,17 +51,7 @@
         <div class="header-middle">
             <!--header-middle-->
             <div class="container">
-                <div class="row">
-                    <div class="col-sm-4">
-                        <div class="logo pull-left">
-                            <a href="@Url.Action("Index","Home")"><img class="logo" src="/Data/images/logo.png" alt="logo" /></a>
-                        </div>
-
-                    </div>
-                    <div class="col-sm-8">
-                       @Html.Partial("_LoginPartial")
-                    </div>
-                </div>
+                @Html.Partial("_LogoPartial")
             </div>
         </div><!--/header-middle-->
 

@@ -93,6 +93,24 @@ namespace Model.DAO
                 return false;
             }
         }
+
+        public bool ChangePassword(User user)
+        {
+            try
+            {
+                var model = db.Users.Find(user.UserID);
+                if (!string.IsNullOrEmpty(user.Password))
+                {
+                    user.Password = user.Password;
+                }
+                db.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
         public bool Actived(User user)
         {
             try

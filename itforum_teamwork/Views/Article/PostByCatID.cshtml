@@ -10,7 +10,7 @@
 <!--features_items-->
 
 <h2 class="title text-center">Dòng bài viết</h2>
-@using (Ajax.BeginForm("PostByCatID", "Article",
+@using(Ajax.BeginForm("PostByCatID", "Article",
                             new AjaxOptions { UpdateTargetId = "grid-list", HttpMethod = "get", LoadingElementId = "loading", OnBegin = "beginPaging", OnSuccess = "successPaging", OnFailure = "failurePaging" },
                             new { id = "frm-search" }))
 {

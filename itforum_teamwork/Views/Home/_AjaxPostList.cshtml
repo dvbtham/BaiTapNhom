@@ -11,7 +11,7 @@
 {
     if (!string.IsNullOrEmpty(ViewBag.searchString))
     {
-        <h5 class="form-inline">Tìm thấy <span class="badge">@Model.Count</span> kết quả cho từ khóa <strong class="italic">"@ViewBag.searchString"</strong>.</h5>
+        <h5 class="form-inline">Tìm thấy <span class="badge">@Model.Count</span> kết quả cho từ khóa <strong class="keywords">" @ViewBag.searchString "</strong>.</h5>
         <br />
     }
     foreach (var item in Model)
@@ -92,7 +92,7 @@ else
 {
     if (!string.IsNullOrEmpty(ViewBag.searchString))
     {
-        <h5 class="form-inline">Không có kết quả nào cho từ khóa <strong class="italic">"@ViewBag.searchString"</strong>.</h5>
+        <h5 class="form-inline">Không có kết quả nào cho từ khóa <strong class="keywords">"@ViewBag.searchString"</strong>.</h5>
         <br />
     }
 }

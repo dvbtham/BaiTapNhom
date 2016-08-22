@@ -10,13 +10,13 @@
 <!--features_items-->
 
 <h2 class="title text-center">Dòng bài viết</h2>
-@using (Ajax.BeginForm("PostByUserID", "Article",
+@using(Ajax.BeginForm("PostByUserID", "Article",
                             new AjaxOptions { UpdateTargetId = "grid-list", HttpMethod = "get", LoadingElementId = "loading", OnBegin = "beginPaging", OnSuccess = "successPaging", OnFailure = "failurePaging" },
                             new { id = "frm-search" }))
 {
     <hr />
     <div id="grid-list">
-        @{ Html.RenderPartial("_AjaxPostList", Model); }
+        @{Html.RenderPartial("_AjaxPostList", Model); }
     </div>
 }
 <br />

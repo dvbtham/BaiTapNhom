@@ -34,7 +34,7 @@ namespace itforum_teamwork.Controllers
             int id = random.Next(11111111, 88888888);
             message.Subject = "Kích hoạt tài khoản IT-Forum";
             message.Body = string.Format(body, user.Name, fromEmail, "<p>Chào mừng bạn đã đăng ký thành viên trên diễn đàn IT-Forum, "
-            + "Để kích hoạt tài khoản </p><a href=" + "localhost" + "/kich-hoat/" + "thanh-cong/actived/" + id + "" + ">Click vào đây để kích hoạt</a>");
+            + "Để kích hoạt tài khoản </p><a href=" + "http://www.codto.somee.com" + "/kich-hoat/" + "thanh-cong/actived/" + id + "" + ">Click vào đây để kích hoạt</a>");
             message.IsBodyHtml = true;
 
             using (var smtp = new SmtpClient())

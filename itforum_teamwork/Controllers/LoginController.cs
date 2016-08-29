@@ -5,7 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Facebook;
 using System.Web.Mvc;
+using System.Configuration;
 
 namespace itforum_teamwork.Controllers
 {
@@ -102,6 +104,33 @@ namespace itforum_teamwork.Controllers
             return View("Login");
         }
 
+        private Uri RedirectUri
+        {
+            get
+            {
+                var uriBuilder = new UriBuilder(Request.Url);
+                uriBuilder.Query = null;
+                uriBuilder.Fragment = null;
+                uriBuilder.Path = Url.Action("FacebookCallback");
+                return uriBuilder.Uri;
+            }
+        }
+
+        //Login with facebook
+        public ActionResult LoginFacebook()
+        {
+            var fb = new FacebookClient();
+            var loginUrl = fb.GetLoginUrl(new
+            {
+                client_id = ConfigurationManager.AppSettings["FBAppId"],
+                client_secret = ConfigurationManager.AppSettings["SecretKey"],
+                redirect_uri = RedirectUri.AbsoluteUri,
+                respone_type = "code",
+                scope="email"
+            });
+            return Redirect(loginUrl.AbsoluteUri);
+        }
+
         protected void AddLoginSession(Model.EF.User user)
         {
             var userSession = new UserLogin();
@@ -129,5 +158,7 @@ namespace itforum_teamwork.Controllers
 
             return account;
         }
+
+
     }
 }

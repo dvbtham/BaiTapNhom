@@ -8,6 +8,7 @@ using System.Web;
 using Facebook;
 using System.Web.Mvc;
 using System.Configuration;
+using Model.EF;
 
 namespace itforum_teamwork.Controllers
 {
@@ -129,6 +130,53 @@ namespace itforum_teamwork.Controllers
                 scope="email"
             });
             return Redirect(loginUrl.AbsoluteUri);
+        }
+
+        public ActionResult FacebookCallback(string code)
+        {
+            var fb = new FacebookClient();
+            dynamic result = fb.Post("oauth/access_token", new
+            {
+                client_id = ConfigurationManager.AppSettings["FBAppId"],
+                client_secret = ConfigurationManager.AppSettings["SecretKey"],
+                redirect_uri = RedirectUri.AbsoluteUri,
+                code = code
+            });
+
+            var accessToken = result.access_token;
+
+            if(!string.IsNullOrEmpty(accessToken))
+            {
+                fb.AccessToken = accessToken;
+                dynamic me = fb.Get("me?fields=first_name,middle_name,last_name,id,email,about");
+                string email = me.email;
+                string about = me.about;
+                string id = me.id;
+                string username = me.email;
+                string firstname = me.first_name;
+                string lastname = me.last_name;
+                string middlename = me.middle_name;
+
+                var user = new User();
+                user.Email = email;
+                user.Name = firstname +" "+ middlename +" "+ lastname;
+                user.Status = true;
+                user.CreatedDate = DateTime.Now;
+                user.RoleID = 2;
+                user.AboutMe = about;
+                user.Password = Encryptor.MD5Hash(id);
+                user.ConfirmedByEmail = true;
+                user.Avatar = "/Data/images/Avatar/default_avatar.png";
+               
+
+                var resultInsert = new UserDAO().InsertForFacbook(user);
+                user.UserID = resultInsert;
+                if(resultInsert > 0)
+                {
+                    AddLoginSession(user);
+                }
+            }
+            return Redirect("/");
         }
 
         protected void AddLoginSession(Model.EF.User user)

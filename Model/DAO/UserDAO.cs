@@ -27,7 +27,7 @@ namespace Model.DAO
             db.Configuration.ProxyCreationEnabled = false;
             return db.Users.ToList();
         }
-        
+
         public int UserCounter()
         {
             return db.Users.Count();
@@ -58,6 +58,30 @@ namespace Model.DAO
                 ShowError.ErrorMessage(dbEx);
             }
             return user.UserID;
+        }
+
+        public long InsertForFacbook(User user)
+        {
+            try
+            {
+                var checkEmail = db.Users.SingleOrDefault(x => x.Email == user.Email);
+                if (checkEmail == null)
+                {
+                    db.Users.Add(user);
+                    db.SaveChanges();
+                    return user.UserID;
+                }
+                else
+                {
+                    return checkEmail.UserID;
+                }
+            }
+            catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
+            {
+                ShowError.ErrorMessage(dbEx);
+                return 0;
+            }
+
         }
 
         public bool Update(User u)

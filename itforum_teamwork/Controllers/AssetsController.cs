@@ -1,18 +1,17 @@
-﻿using Model.DAO;
+﻿using itforum_teamwork.Common;
+using Model.DAO;
 using Model.EF;
-using System;
+using MvcPaging;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using MvcPaging;
-using itforum_teamwork.Common;
 
 namespace itforum_teamwork.Controllers
 {
     public class AssetsController : Controller
     {
         private const int defaultPageSize = 10;
+
         public ActionResult Index(string searchString, int? page)
         {
             CommonConstants.IsAjax = false;
@@ -41,7 +40,7 @@ namespace itforum_teamwork.Controllers
                 return RedirectToAction("Index", "Error");
             return View(modelFirst);
         }
-       
+
         public ActionResult AssetByUser(int? page, long id)
         {
             CommonConstants.IsAjax = false;
@@ -53,6 +52,7 @@ namespace itforum_teamwork.Controllers
             else
                 return View(assets);
         }
+
         public ActionResult AssetByAssType(int? page, int id)
         {
             CommonConstants.IsAjax = false;

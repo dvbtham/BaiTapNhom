@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Entity.Validation;
-using System.Linq;
-using System.Web;
 
 namespace itforum_teamwork.Common
 {
@@ -18,8 +15,8 @@ namespace itforum_teamwork.Common
                     string message = string.Format("{0}:{1}",
                         validationErrors.Entry.Entity.ToString(),
                         validationError.ErrorMessage);
-                    // raise a new exception nesting  
-                    // the current instance as InnerException  
+                    // raise a new exception nesting
+                    // the current instance as InnerException
                     raise = new InvalidOperationException(message, raise);
                 }
             }

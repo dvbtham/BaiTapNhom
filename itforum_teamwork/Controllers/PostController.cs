@@ -1,18 +1,18 @@
 ﻿using itforum_teamwork.Common;
 using Model.DAO;
 using Model.EF;
+using MvcPaging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using MvcPaging;
 
 namespace itforum_teamwork.Controllers
 {
     public class PostController : BaseController
     {
         private const int defaultPageSize = 10;
+
         public ActionResult Index(string searchString, int? page)
         {
             ViewBag.SearchString = searchString;
@@ -32,12 +32,14 @@ namespace itforum_teamwork.Controllers
             else
                 return View(posts);
         }
+
         [HttpGet]
         public ActionResult Create()
         {
             SetViewBag();
             return View();
         }
+
         [HttpPost, ValidateInput(false)]
         public ActionResult Create(Post postModel)
         {
@@ -70,11 +72,13 @@ namespace itforum_teamwork.Controllers
             }
             return View();
         }
+
         public void SetViewBag(int? selectedID = null)
         {
             var dao = new CategoryDAO();
             ViewBag.CategoryID = new SelectList(dao.ListAll(), "CategoryID", "CategoryName", selectedID);
         }
+
         public void SetUserName(int? selectedID = null)
         {
             var dao = new UserDAO();
@@ -110,6 +114,7 @@ namespace itforum_teamwork.Controllers
             }
             return View();
         }
+
         public ActionResult Delete(int id)
         {
             new ArticleDAO().Delete(id);

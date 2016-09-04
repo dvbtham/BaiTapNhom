@@ -1,29 +1,29 @@
 ﻿using Model.EF;
-using System;
+using PagedList;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using PagedList;
 
 namespace Model.DAO
 {
     public class TagDAO
     {
-        itforumEntities db = null;
+        private itforumEntities db = null;
+
         public TagDAO()
         {
             db = new itforumEntities();
         }
+
         public int TagsCounter()
         {
             return db.Tags.Count();
         }
+
         public List<Tag> ListAll()
         {
             return db.Tags.ToList();
         }
-       
+
         public IEnumerable<Tag> GetTagsPaging(string searchString, int page, int pageSize)
         {
             IQueryable<Tag> tag = db.Tags;
@@ -33,11 +33,13 @@ namespace Model.DAO
             }
             return tag.OrderByDescending(x => x.TagID).ToPagedList(page, pageSize);
         }
+
         //Get tag
         public Tag ViewDetail(long id)
         {
             return db.Tags.Find(id);
         }
+
         //CRUD
         public bool AddTag(Tag tag)
         {
@@ -52,6 +54,7 @@ namespace Model.DAO
                 return false;
             }
         }
+
         public bool Edit(Tag tag)
         {
             try
@@ -66,6 +69,7 @@ namespace Model.DAO
                 return false;
             }
         }
+
         public bool Delete(long id)
         {
             try

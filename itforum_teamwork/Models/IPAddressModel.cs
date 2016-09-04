@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace itforum_teamwork.Models
+﻿namespace itforum_teamwork.Models
 {
     public class IPAddressModel
     {

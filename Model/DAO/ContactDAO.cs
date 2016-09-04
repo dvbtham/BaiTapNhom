@@ -1,16 +1,14 @@
 ﻿using itforum_teamwork.Common;
 using Model.EF;
-using System;
-using System.Collections.Generic;
 using System.Data.Entity.Validation;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 namespace Model.DAO
 {
     public class ContactDAO
     {
-        itforumEntities db = null;
+        private itforumEntities db = null;
+
         public ContactDAO()
         {
             db = new itforumEntities();
@@ -20,6 +18,7 @@ namespace Model.DAO
         {
             return db.Contacts.SingleOrDefault(x => x.Status == true);
         }
+
         public bool Create(Contact model)
         {
             try
@@ -28,12 +27,13 @@ namespace Model.DAO
                 db.SaveChanges();
                 return true;
             }
-            catch(DbEntityValidationException dbEx)
+            catch (DbEntityValidationException dbEx)
             {
                 ShowError.ErrorMessage(dbEx);
                 return false;
             }
         }
+
         public bool Edit(Contact model)
         {
             try
@@ -54,6 +54,7 @@ namespace Model.DAO
                 return false;
             }
         }
+
         public Contact ViewDetails(int id)
         {
             return db.Contacts.Find(id);

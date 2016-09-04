@@ -1,20 +1,17 @@
-﻿using itforum_teamwork.Areas.Admin.Models;
-using itforum_teamwork.Common;
+﻿using itforum_teamwork.Common;
 using Model.DAO;
 using Model.EF;
-using System;
+using MvcPaging;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using MvcPaging;
 
 namespace itforum_teamwork.Controllers
 {
-
     public class HomeController : Controller
     {
         private const int defaultPageSize = 10;
+
         public ActionResult Index(string searchString, int? page)
         {
             CommonConstants.IsAjax = true;
@@ -45,6 +42,5 @@ namespace itforum_teamwork.Controllers
             ViewBag.Slides = new ArticleDAO().GetHotArticle();
             return PartialView();
         }
-
     }
 }

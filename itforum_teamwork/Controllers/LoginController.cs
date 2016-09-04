@@ -1,14 +1,12 @@
-﻿using itforum_teamwork.Areas.Admin.Models;
+﻿using Facebook;
+using itforum_teamwork.Areas.Admin.Models;
 using itforum_teamwork.Common;
 using Model.DAO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using Facebook;
-using System.Web.Mvc;
-using System.Configuration;
 using Model.EF;
+using System;
+using System.Configuration;
+using System.Web;
+using System.Web.Mvc;
 
 namespace itforum_teamwork.Controllers
 {
@@ -22,7 +20,6 @@ namespace itforum_teamwork.Controllers
                 return View();
             else
             {
-
                 UserDAO userDAO = new UserDAO();
                 userDAO.ClientLogin(account.Email, Encryptor.MD5Hash(account.Password));
                 var user = userDAO.GetUserByEmail(account.Email);
@@ -31,11 +28,11 @@ namespace itforum_teamwork.Controllers
                 return RedirectToAction("Index", "Home");
             }
         }
+
         [AllowAnonymous]
         [HttpPost]
         public ActionResult Login(LoginModel loginModel, string ReturnUrl)
         {
-
             if (ModelState.IsValid)
             {
                 var dao = new UserDAO();
@@ -67,7 +64,6 @@ namespace itforum_teamwork.Controllers
                     {
                         return RedirectToAction("Index", "Home");
                     }
-
                 }
                 else
                     if (res == 0)
@@ -84,7 +80,6 @@ namespace itforum_teamwork.Controllers
                             {
                                 ModelState.AddModelError("", "Sai mật khẩu");
                             }
-
                             else
                                 if (res == -2)
                                 {
@@ -127,7 +122,7 @@ namespace itforum_teamwork.Controllers
                 client_secret = ConfigurationManager.AppSettings["SecretKey"],
                 redirect_uri = RedirectUri.AbsoluteUri,
                 respone_type = "code",
-                scope="email"
+                scope = "email"
             });
             return Redirect(loginUrl.AbsoluteUri);
         }
@@ -145,7 +140,7 @@ namespace itforum_teamwork.Controllers
 
             var accessToken = result.access_token;
 
-            if(!string.IsNullOrEmpty(accessToken))
+            if (!string.IsNullOrEmpty(accessToken))
             {
                 fb.AccessToken = accessToken;
                 dynamic me = fb.Get("me?fields=first_name,middle_name,last_name,id,email,about");
@@ -159,7 +154,7 @@ namespace itforum_teamwork.Controllers
 
                 var user = new User();
                 user.Email = email;
-                user.Name = firstname +" "+ middlename +" "+ lastname;
+                user.Name = firstname + " " + middlename + " " + lastname;
                 user.Status = true;
                 user.CreatedDate = DateTime.Now;
                 user.RoleID = 2;
@@ -167,11 +162,10 @@ namespace itforum_teamwork.Controllers
                 user.Password = Encryptor.MD5Hash(id);
                 user.ConfirmedByEmail = true;
                 user.Avatar = "/Data/images/Avatar/default_avatar.png";
-               
 
                 var resultInsert = new UserDAO().InsertForFacbook(user);
                 user.UserID = resultInsert;
-                if(resultInsert > 0)
+                if (resultInsert > 0)
                 {
                     AddLoginSession(user);
                 }
@@ -190,6 +184,7 @@ namespace itforum_teamwork.Controllers
 
             Session.Add(CommonConstants.CLIENT_USER_SESSION, userSession);
         }
+
         protected Account CheckCookie()
         {
             Account account = null;
@@ -206,7 +201,5 @@ namespace itforum_teamwork.Controllers
 
             return account;
         }
-
-
     }
 }

@@ -2,8 +2,6 @@
 using Model.DAO;
 using Model.EF;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
@@ -17,12 +15,14 @@ namespace itforum_teamwork.Controllers
             var user = new ManageDAO().GetUserByID(Convert.ToInt64(session.UserID));
             return View(user);
         }
+
         [HttpGet]
         public ActionResult Edit(long id)
         {
             var user = new UserDAO().ViewDetail(id);
             return View(user);
         }
+
         [HttpPost]
         public ActionResult Edit(User user)
         {
@@ -77,6 +77,7 @@ namespace itforum_teamwork.Controllers
             }
             return RedirectToAction("Login", "Login");
         }
+
         //Đổi mật khẩu
         public ActionResult ResetPassword(User user)
         {

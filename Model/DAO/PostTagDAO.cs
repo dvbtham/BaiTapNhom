@@ -1,41 +1,45 @@
 ﻿using Model.EF;
-using System;
+using PagedList;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using PagedList;
 
 namespace Model.DAO
 {
     public class PostTagDAO
     {
-        itforumEntities db = null;
+        private itforumEntities db = null;
+
         public PostTagDAO()
         {
             db = new itforumEntities();
         }
+
         public IEnumerable<PostTag> ListPostTagAll(int pageNumber, int pageSize)
         {
             var model = db.PostTags;
             return model.GroupBy(x => x.PostID).Select(x => x.FirstOrDefault()).OrderByDescending(x => x.PostID).ToPagedList(pageNumber, pageSize);
         }
+
         public IEnumerable<PostTag> PostTagAll()
         {
             return db.PostTags.ToList();
         }
+
         public List<PostTag> GetTagByID(long postID)
         {
             return db.PostTags.Where(x => x.PostID == postID).ToList();
         }
+
         public Post GetPostTitle(long postID)
         {
             return db.Posts.Find(postID);
         }
+
         public Tag GetTagName(long tagID)
         {
             return db.Tags.Find(tagID);
         }
+
         //CRUD
         public int AddTag(PostTag tag)
         {
@@ -58,6 +62,7 @@ namespace Model.DAO
                 return 2;
             }
         }
+
         public bool Edit(long postID, long tagID)
         {
             try
@@ -75,6 +80,7 @@ namespace Model.DAO
                 return false;
             }
         }
+
         public bool Delete(long postID, long tagID)
         {
             try
@@ -89,15 +95,18 @@ namespace Model.DAO
                 return false;
             }
         }
+
         //Get tag
         public PostTag ViewDetail(long postID, long tagID)
         {
             return db.PostTags.SingleOrDefault(x => x.PostID == postID && x.TagID == tagID);
         }
+
         public List<Tag> ListTagName()
         {
             return db.Tags.ToList();
         }
+
         public List<Post> ListPostName()
         {
             return db.Posts.ToList();

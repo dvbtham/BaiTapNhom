@@ -1,20 +1,21 @@
-﻿using itforum_teamwork.Models;
+﻿using Common;
+using itforum_teamwork.Common;
+using itforum_teamwork.Models;
 using Model.DAO;
 using Model.EF;
+using MvcPaging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Common;
-using MvcPaging;
-using itforum_teamwork.Common;
 
 namespace itforum_teamwork.Controllers
 {
     public class ArticleController : Controller
     {
         private const int defaultPageSize = 10;
+
         public ActionResult Index(string searchString, int? page)
         {
             CommonConstants.IsAjax = true;
@@ -40,7 +41,7 @@ namespace itforum_teamwork.Controllers
                 return View(posts);
         }
 
-        public ActionResult PostByUser(long id, int? page )
+        public ActionResult PostByUser(long id, int? page)
         {
             CommonConstants.IsAjax = true;
             IList<Post> posts = new ArticleDAO().GetPostsByUserID(id);
@@ -99,7 +100,6 @@ namespace itforum_teamwork.Controllers
                     ViewBag.NextID = nextID;
 
                     ViewBag.nextTitle = viewModelNext.Title;
-
                 }
                 else
                 {
@@ -163,7 +163,6 @@ namespace itforum_teamwork.Controllers
             }
             var myPost = new ArticleDAO().GetArticleByID(id);
             return View(myPost);
-
         }
 
         public ActionResult Tag(long id, int page = 1, int pageSize = 10)
@@ -173,6 +172,7 @@ namespace itforum_teamwork.Controllers
             ViewBag.Tag = new ArticleDAO().GetTag(id);
             return View(model);
         }
+
         public PartialViewResult Top10Article()
         {
             var top10 = new ArticleDAO().GetArticleTop10();

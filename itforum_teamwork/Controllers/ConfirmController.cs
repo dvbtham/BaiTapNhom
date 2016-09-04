@@ -1,14 +1,9 @@
-﻿using itforum_teamwork.Common;
-using itforum_teamwork.Models;
-using Model.DAO;
+﻿using Model.DAO;
 using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 
 namespace itforum_teamwork.Controllers
@@ -16,9 +11,9 @@ namespace itforum_teamwork.Controllers
     public class ConfirmController : Controller
     {
         public static string email = "";
+
         public async Task<ActionResult> Index()
         {
-
             string fromEmail = Session["client_Email"].ToString();
             email = fromEmail;
             string ToEmail = fromEmail;
@@ -52,6 +47,7 @@ namespace itforum_teamwork.Controllers
                 return View();
             }
         }
+
         public ActionResult Actived()
         {
             if (!string.IsNullOrEmpty(email))
@@ -67,7 +63,6 @@ namespace itforum_teamwork.Controllers
             }
             else
                 return RedirectToAction("Index", "Error");
-
         }
     }
 }

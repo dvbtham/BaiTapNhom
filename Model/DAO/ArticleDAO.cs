@@ -1,23 +1,20 @@
-﻿using Model.EF;
-using System;
+﻿using itforum_teamwork.Common;
+using Model.EF;
+using PagedList;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using PagedList;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
-using itforum_teamwork.Common;
 
 namespace Model.DAO
 {
     public class ArticleDAO
     {
-        itforumEntities db = null;
+        private itforumEntities db = null;
+
         public ArticleDAO()
         {
             db = new itforumEntities();
         }
+
         public long? AddViews(long id)
         {
             var post = db.Posts.Find(id);
@@ -29,26 +26,28 @@ namespace Model.DAO
         {
             return db.Posts.Where(x => x.Status == true).OrderByDescending(x => x.PostedDate).ToList();
         }
+
         public List<Post> GetPostsByUserID(long id)
         {
             return db.Posts.Where(x => x.UserID == id).OrderByDescending(x => x.PostedDate).ToList();
         }
+
         public List<Post> GetPostsByCatID(long id)
         {
             return db.Posts.Where(x => x.CategoryID == id).ToList();
         }
-       
+
         //Danh sách 10 bài viết nổi bật
         public List<Post> GetArticleTop10()
         {
             return db.Posts.Where(x => x.Status == true).OrderByDescending(x => x.Views).Take(10).ToList();
         }
+
         //set name
         public List<Post> ListPostAll()
         {
             return db.Posts.ToList();
         }
-
 
         public List<Post> GetNewArticle()
         {
@@ -94,7 +93,6 @@ namespace Model.DAO
                              UserID = a.UserID,
                              PostID = a.PostID,
                              CategoryID = a.CategoryID
-
                          }).AsEnumerable().Select(x => new Post()
                          {
                              Title = x.Title,
@@ -128,12 +126,11 @@ namespace Model.DAO
             IQueryable<Post> model = db.Posts.Where(x => x.Status == true);
             return model.OrderByDescending(x => x.PostedDate).ToPagedList(page, pageSize);
         }
+
         public Post GetArticleByID(long id)
         {
             return db.Posts.Find(id);
         }
-
-
 
         public Post GetNextArticleByID(long PostID, long CatID)
         {
@@ -156,6 +153,7 @@ namespace Model.DAO
             }
             return post.PostID;
         }
+
         public bool Update(Post post)
         {
             try
@@ -217,8 +215,6 @@ namespace Model.DAO
             {
                 return false;
             }
-
         }
-
     }
 }

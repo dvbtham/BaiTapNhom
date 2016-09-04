@@ -1,13 +1,8 @@
-﻿using itforum_teamwork;
-using itforum_teamwork.Areas.Admin.Models;
-using itforum_teamwork.Common;
+﻿using itforum_teamwork.Common;
 using itforum_teamwork.Models;
 using Model.DAO;
 using Model.EF;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace itforum_teamwork.Controllers
@@ -18,6 +13,7 @@ namespace itforum_teamwork.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public ActionResult Signup(AccountViewModel model)
         {
@@ -60,8 +56,5 @@ namespace itforum_teamwork.Controllers
             }
             return View();
         }
-
-        
-
     }
 }

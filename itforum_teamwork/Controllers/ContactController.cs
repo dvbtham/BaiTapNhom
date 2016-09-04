@@ -1,16 +1,11 @@
-﻿using Model.DAO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Net.Mail;
-using System.Web.Mvc;
-using System.Configuration;
-using Model.EF;
+﻿using itforum_teamwork.Common;
 using itforum_teamwork.Models;
-using System.Threading.Tasks;
+using Model.DAO;
+using System.Configuration;
 using System.Net;
-using itforum_teamwork.Common;
+using System.Net.Mail;
+using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace itforum_teamwork.Controllers
 {
@@ -21,6 +16,7 @@ namespace itforum_teamwork.Controllers
             CommonConstants.IsAjax = false;
             return View();
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
@@ -34,7 +30,7 @@ namespace itforum_teamwork.Controllers
                 MailAddress to = new MailAddress(ToEmail);
 
                 var body = "<p>Tin nhắn từ: {0} ({1})</p><p>Nội dung:</p><p>{2}</p>";
-                var message = new MailMessage(fromEmail,ToEmail);
+                var message = new MailMessage(fromEmail, ToEmail);
 
                 message.Subject = model.Subject;
                 message.Body = string.Format(body, model.FromName, model.FromEmail, model.Message);
@@ -57,15 +53,18 @@ namespace itforum_teamwork.Controllers
             }
             return View(model);
         }
+
         public ActionResult Sent()
         {
             return View();
         }
+
         public PartialViewResult _ContactPartial()
         {
             var myInfo = new ContactDAO().GetContactInfo();
             return PartialView(myInfo);
         }
+
         public PartialViewResult TopContactInfo()
         {
             var myInfo = new ContactDAO().GetContactInfo();

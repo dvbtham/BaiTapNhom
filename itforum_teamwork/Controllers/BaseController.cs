@@ -1,8 +1,4 @@
 ﻿using itforum_teamwork.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
@@ -20,6 +16,7 @@ namespace itforum_teamwork.Controllers
             }
             base.OnActionExecuting(filterContext);
         }
+
         protected void SetAlert(string message, string type)
         {
             TempData["AlertMessage"] = message;

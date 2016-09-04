@@ -1,27 +1,24 @@
-﻿using Model.EF;
-using System;
+﻿using itforum_teamwork.Common;
+using Model.EF;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using PagedList;
-using System.Data.Entity.Validation;
-using System.Diagnostics;
-using itforum_teamwork.Common;
 
 namespace Model.DAO
 {
     public class UserDAO
     {
-        itforumEntities db = null;
+        private itforumEntities db = null;
+
         public UserDAO()
         {
             db = new itforumEntities();
         }
+
         public List<Role> ListRole()
         {
             return db.Roles.ToList();
         }
+
         public List<User> ListUser()
         {
             db.Configuration.ProxyCreationEnabled = false;
@@ -32,11 +29,13 @@ namespace Model.DAO
         {
             return db.Users.Count();
         }
+
         public User GetUserByID(long? id)
         {
             var user = db.Users.SingleOrDefault(x => x.UserID == id);
             return user;
         }
+
         public bool ChangeStatus(long id)
         {
             var user = db.Users.Find(id);
@@ -46,6 +45,7 @@ namespace Model.DAO
 
             return user.Status;
         }
+
         public long Insert(User user)
         {
             try
@@ -81,7 +81,6 @@ namespace Model.DAO
                 ShowError.ErrorMessage(dbEx);
                 return 0;
             }
-
         }
 
         public bool Update(User u)
@@ -135,6 +134,7 @@ namespace Model.DAO
                 return false;
             }
         }
+
         public bool Actived(User user)
         {
             try
@@ -150,6 +150,7 @@ namespace Model.DAO
                 return false;
             }
         }
+
         public bool Edit(User u)
         {
             try
@@ -182,8 +183,8 @@ namespace Model.DAO
             {
                 return false;
             }
-
         }
+
         public bool Delete(int id)
         {
             try
@@ -197,7 +198,6 @@ namespace Model.DAO
             {
                 return false;
             }
-
         }
 
         public User GetUserByEmail(string email)
@@ -217,7 +217,6 @@ namespace Model.DAO
             {
                 return 0;
             }
-
             else
             {
                 if (result.Status == false)
@@ -234,7 +233,6 @@ namespace Model.DAO
                         {
                             return -2;
                         }
-
                         else
                         {
                             if (result.Password == password)
@@ -244,6 +242,7 @@ namespace Model.DAO
                         }
             }
         }
+
         public int ClientLogin(string email, string password)
         {
             var result = db.Users.SingleOrDefault(x => x.Email == email);
@@ -276,6 +275,7 @@ namespace Model.DAO
                         }
             }
         }
+
         public bool CheckEmail(string email)
         {
             return db.Users.Count(x => x.Email == email) > 0;

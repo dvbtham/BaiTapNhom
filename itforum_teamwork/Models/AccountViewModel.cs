@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace itforum_teamwork.Models
 {
@@ -28,7 +25,6 @@ namespace itforum_teamwork.Models
         [DataType(DataType.Password)]
         [Display(Name = "Xác nhận mật khẩu (*)")]
         [Compare("Password", ErrorMessage = "Mật khẩu không trùng khớp")]
-
         public string ConfirmPassword { get; set; }
 
         [StringLength(50)]
